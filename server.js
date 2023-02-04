@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(express.json());
 //Custom Middleware
 app.use((req, res, next) => {
+  console.log(req.path, req.method);
   const allowedOrigins = [
     'http://localhost:3000',
     'https://support-drunkenbytes.vercel.app',
