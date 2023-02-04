@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000;
 //Enabling CORS
 const corsConfig = require('./config/cors')
 const cors = require("cors");
-app.use(cors());
+app.use(cors(corsConfig));
 //Cookie Parser
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
