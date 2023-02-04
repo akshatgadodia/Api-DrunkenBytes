@@ -27,23 +27,27 @@ app.use((req, res, next) => {
     'http://localhost:3000',
     'https://support-drunkenbytes.vercel.app',
   ]
-  if(allowedOrigins.includes(req.get('origin'))){
-  console.log(req.path, req.method, "WEBSITE CALL");
-    res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
-    res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
-    res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.setHeader("Access-Control-Allow-Credentials",'true');
-    req.fromWebsite=true;
-    // console.log(res)
-  }
-  else{
-  console.log(req.path, req.method, "API CALL");
-    res.setHeader("Access-Control-Allow-Origin","*");
-    res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
-    res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    req.fromWebsite=false;
-  }
-  console.log(req.cookies)
+  // if(allowedOrigins.includes(req.get('origin'))){
+  // console.log(req.path, req.method, "WEBSITE CALL");
+  //   res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
+  //   res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
+  //   res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  //   res.setHeader("Access-Control-Allow-Credentials",'true');
+  //   req.fromWebsite=true;
+  //   // console.log(res)
+  // }
+  // else{
+  // console.log(req.path, req.method, "API CALL");
+  //   res.setHeader("Access-Control-Allow-Origin","*");
+  //   res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
+  //   res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  //   req.fromWebsite=false;
+  // }
+  res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
+  res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader("Access-Control-Allow-Credentials",'true');
+  // console.log(req.cookies)
   next();
 });
 
