@@ -16,11 +16,6 @@ const port = process.env.PORT || 5000;
 //Enabling CORS
 // const cors = require("cors");
 // app.use(cors());
-//Cookie Parser
-const cookieParser = require('cookie-parser')
-app.use(cookieParser());
-//Using Express.JSON
-app.use(express.json());
 //Custom Middleware
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -51,6 +46,11 @@ app.use((req, res, next) => {
   // console.log(req.cookies)
   next();
 });
+//Cookie Parser
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
+//Using Express.JSON
+app.use(express.json());
 
 //Routes
 //User Route
