@@ -25,11 +25,10 @@ app.use(express.json());
 app.use((req, res, next) => {
   const allowedOrigins = [
     'http://localhost:3000',
-    'https://support-drunkenbytes.vercel.app/',
+    'https://support-drunkenbytes.vercel.app',
   ]
-  console.log("origin is",req.get('origin'))
   if(allowedOrigins.includes(req.get('origin'))){
-    console.log(allowedOrigins);
+  console.log(req.path, req.method, "WEBSITE CALL");
     res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
     res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -38,12 +37,12 @@ app.use((req, res, next) => {
     // console.log(res)
   }
   else{
+  console.log(req.path, req.method, "API CALL");
     res.setHeader("Access-Control-Allow-Origin","*");
     res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     req.fromWebsite=false;
   }
-  console.log(req.path, req.method);
   console.log(req.cookies)
   next();
 });
