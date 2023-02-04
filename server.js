@@ -13,12 +13,13 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //Middlewares
+//Enabling CORS
+const corsConfig = require('./config/cors')
+const cors = require("cors");
+app.use(cors(corsConfig));
 //Cookie Parser
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
-//Enabling CORS
-const cors = require("cors");
-app.use(cors());
 //Using Express.JSON
 app.use(express.json());
 //Custom Middleware

@@ -3,7 +3,7 @@ const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 var jwt = require("jsonwebtoken");
 const SupportUser = require("../models/SupportUser");
-const bcrypt = require("bcryptjs");
+var bcrypt = require('bcryptjs');
 const { ACCOUNT_ADDRESS } = require('../utils/constants');
 
 const registerSupportUser = asyncHandler(async (req, res, next) => {
