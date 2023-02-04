@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 //Connecting the database
-const connectDB = require("./config/db");
+const connectDB = require("../config/db");
 connectDB();
 
 //Creating express server
@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(express.json());
  
 //Routes
-const indexRouter = require('./routes/indexRouter')
+const indexRouter = require('../routes/indexRouter')
 app.use('/',indexRouter);
 
 app.get("/", async (req, res) => {
@@ -58,7 +58,7 @@ app.get("/", async (req, res) => {
 });
 
 // Error Handler
-const errorHandler = require("./middlewares/errorHandler");
+const errorHandler = require("../middlewares/errorHandler");
 app.use(errorHandler);
 
 //Listening om the port
