@@ -25,7 +25,7 @@ app.use(express.json());
 app.use((req, res, next) => {
   const allowedOrigins = [
     'http://localhost:3000',
-    'https://support-drunkenbytes.vercel.app/'
+    'https://support-drunkenbytes.vercel.app/',
   ]
   console.log("origin is",req.get('origin'))
   if(allowedOrigins.includes(req.get('origin'))){
