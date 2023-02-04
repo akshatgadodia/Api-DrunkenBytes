@@ -7,7 +7,6 @@ const corsConfig = {
     methods: ['GET', 'PUT', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
     credentials: true,
-    maxAge: 600,
     exposedHeaders: ['*', 'Authorization', ]
 }
 module.exports = corsConfig
