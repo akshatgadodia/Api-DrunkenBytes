@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000;
 //Enabling CORS
 const corsConfig = require('./config/cors')
 const cors = require("cors");
-app.use(cors(corsConfig));
+// app.use(cors(corsConfig));
 //Cookie Parser
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
@@ -25,8 +25,8 @@ app.use(express.json());
 //Custom Middleware
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', true)
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  // res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
   res.setHeader(
     'Access-Control-Allow-Headers',
