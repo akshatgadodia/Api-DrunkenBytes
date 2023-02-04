@@ -14,8 +14,8 @@ const port = process.env.PORT || 5000;
 
 //Middlewares
 //Enabling CORS
-const corsConfig = require('./config/cors')
-const cors = require("cors");
+// const corsConfig = require('./config/cors')
+// const cors = require("cors");
 // app.use(cors(corsConfig));
 //Cookie Parser
 const cookieParser = require('cookie-parser')
@@ -24,14 +24,29 @@ app.use(cookieParser());
 app.use(express.json());
 //Custom Middleware
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  // res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  )
+  let headers;
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'https://support-drunkenbytes.vercel.app/'
+  ]
+  if(allowedOrigins.includes(req.get('origin'))){
+    console.log(allowedOrigins);
+    headers={
+      "Access-Control-Allow-Origin": allowedOrigins,
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Allowed-Headers": "*",
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Request-Headers": "Authorization"
+    }
+  }
+  else{
+    headers={
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Allowed-Headers": "*, Authorization",
+      "Access-Control-Request-Headers": "Authorization"
+    }
+  }
   console.log(req.path, req.method);
   console.log(req.get('origin'))
   console.log(req.cookies)
