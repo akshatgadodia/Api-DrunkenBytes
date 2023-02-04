@@ -14,60 +14,40 @@ const port = process.env.PORT || 5000;
 
 //Middlewares
 //Enabling CORS
-// const cors = require("cors");
-// app.use(cors());
-//Custom Middleware
+const whitelist = [
+  'http://localhost:3000/',
+  'http://localhost:3000',
+  'https://support-drunkenbytes.vercel.app/',
+  'https://support-drunkenbytes.vercel.app'
+];
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  const allowedOrigins = [
-    'http://localhost:3000',
-    'https://support-drunkenbytes.vercel.app',
-  ]
-  // if(allowedOrigins.includes(req.get('origin'))){
-  // console.log(req.path, req.method, "WEBSITE CALL");
-  //   res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
-  //   res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
-  //   res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  //   res.setHeader("Access-Control-Allow-Credentials",'true');
-  //   req.fromWebsite=true;
-  //   // console.log(res)
-  // }
-  // else{
-  // console.log(req.path, req.method, "API CALL");
-  //   res.setHeader("Access-Control-Allow-Origin","*");
-  //   res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
-  //   res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  //   req.fromWebsite=false;
-  // }
-  res.setHeader("Access-Control-Allow-Origin",req.get('origin'));
-  res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, POST, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers",'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.setHeader("Access-Control-Allow-Credentials",'true');
-  // console.log(req.cookies)
-  next();
+  const origin = req.get('origin');
+  const isWhitelisted = whitelist.includes(origin);
+  if (isWhitelisted) {
+    res.setHeader('Access-Control-Allow-Origin', req.get('origin'));
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+  }
+  else{
+    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+  }
+  // Pass to next layer of middleware
+  if (req.method === 'OPTIONS') res.sendStatus(200);
+  else next();
 });
+
 //Cookie Parser
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 //Using Express.JSON
 app.use(express.json());
-
+ 
 //Routes
-//User Route
-const userRoutes = require("./routes/userRoute");
-app.use("/api/user", userRoutes);
-//Support User Route
-const supportUserRoutes = require("./routes/supportUserRoute");
-app.use("/api/support-user", supportUserRoutes);
-//NFT Route
-const nftRoutes = require("./routes/nftRoute");
-app.use("/api/nft", nftRoutes)
-//Transaction Routes
-const transactionRoutes = require("./routes/transactionRoute");
-app.use("/api/transaction", transactionRoutes)
-//Api Key Routes
-const apiKeyRoutes = require("./routes/apiKeyRoute");
-app.use("/api/api-key", apiKeyRoutes)
+const indexRouter = require('./routes/indexRouter')
+app.use('/',indexRouter);
 
 app.get("/", async (req, res) => {
   res.send(`
@@ -85,3 +65,6 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+// Export the Express API
+module.exports = app;
