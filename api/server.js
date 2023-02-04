@@ -50,11 +50,12 @@ const indexRouter = require('../routes/indexRouter')
 app.use('/',indexRouter);
 
 app.get("/", async (req, res) => {
-  res.status(201).send(`
-    <div style='width:100%; height:100%; display:flex; justify-content:center; align-items:center;'>
-        <h1>Welcome to NFT based Warranty System by Drunken Bytes</h1>
-    </div>
-    `);
+  // res.status(201).send(`
+  //   <div style='width:100%; height:100%; display:flex; justify-content:center; align-items:center;'>
+  //       <h1>Welcome to NFT based Warranty System by Drunken Bytes</h1>
+  //   </div>
+  //   `);
+  res.json({message: "WELCOME"})
 });
 
 // Error Handler
