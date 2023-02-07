@@ -59,11 +59,29 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
       process.env.D_B_SECRET_KEY,
       { expiresIn: "7d" }
     );
-    res.cookie("token",accessToken,{
-      expires: new Date(Date.now() + (3600 * 1000 * 24 * 180 * 1)), //second min hour days year
+    let role;
+    if(roles.includes(1541)){
+      role = "ADMIN"
+    }
+    else if(roles.includes(3894)){
+      role = "EDITOR"
+    }
+    else if(roles.includes(7489)){
+      role = "SUPPORT"
+    }
+    else{
+      role = "USER"
+    }
+    res.cookie("supportUserAccessToken", accessToken,{
+      expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
       secure: true, // set to true if your using https or samesite is none
-      // httpOnly: true, // backend only
-      sameSite: 'none' // set to none for cross-request
+      sameSite: 'none', // set to none for cross-request
+      httpOnly: true
+    });
+    res.cookie("supportUserRole", role,{
+      expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
+      secure: true, // set to true if your using https or samesite is none
+      sameSite: 'none', // set to none for cross-request
     });
     res.status(200).json({
       success: true,

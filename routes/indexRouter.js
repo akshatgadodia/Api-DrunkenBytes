@@ -16,5 +16,8 @@ router.use("/v1/transaction", transactionRoutes)
 //Api Key Routes
 const apiKeyRoutes = require("./apiKeyRoute");
 router.use("/v1/api-key", apiKeyRoutes)
+//Admin Dashboard
+const adminDashboardRoute = require("./adminDashboardRoute")
+router.use("/v1/admin-dashboard", adminDashboardRoute)
 
 module.exports = router
