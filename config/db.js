@@ -4,7 +4,7 @@ const cluster = process.env.DB_CLUSTER;
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 const connectionUrl = `mongodb+srv://${username}:${password}@${cluster}.gvryb6a.mongodb.net/?retryWrites=true&w=majority`
-
+console.log(cluster,username,password);
 const connectDB = async () => {
     try {
         await mongoose.set("strictQuery", false);

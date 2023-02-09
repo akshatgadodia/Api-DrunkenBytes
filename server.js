@@ -1,5 +1,5 @@
 //Configuring Dotenv to use environment variables from .env file
-require("dotenv").config();
+require("dotenv").config({path:"./index.env"});
 
 //Connecting the database
 const connectDB = require("./config/db");
