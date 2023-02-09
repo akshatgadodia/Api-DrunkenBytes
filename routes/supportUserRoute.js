@@ -11,4 +11,5 @@ const {
 router.post("/login", loginSupportUser);
 router.post("/register", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN), registerSupportUser);
 
+
 module.exports = router;

@@ -5,7 +5,7 @@ const Message = require("../models/Message");
 
 const saveMessage = asyncHandler(async (req, res, next) => {
   await new Message({
-    messageBy: req.userId,
+    messageBy: req.body.messageBy || req.userId,
     subject: req.body.subject,
     type: req.body.type,
     message: req.body.message,
@@ -20,9 +20,13 @@ const saveMessage = asyncHandler(async (req, res, next) => {
 });
 
 const getMessages = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find({})
-    .select({ messageBy: 1, _id: 1, type: 1, subject: 1, date: 1 })
-    .sort({ date: -1 });
+  let searchParameter = {};
+  // if (req.roles.includes(3894)) searchParameter = {type: "Editor"};
+  // else if (req.roles.includes(7489)) searchParameter = { type: "Support" };
+  const messages = await Message.find(searchParameter)
+    .sort({ date: -1 })
+    .populate({ path: "messageBy", select: ["name"] })
+    .select({message:0, type:0});
   res.status(201).json({
     success: true,
     data: {
@@ -32,7 +36,7 @@ const getMessages = asyncHandler(async (req, res, next) => {
 });
 
 const getMessageById = asyncHandler(async (req, res, next) => {
-  const message = await Message.find({_id: req.params.messageId});
+  const message = await Message.find({ _id: req.params.messageId });
   res.status(201).json({
     success: true,
     data: {
