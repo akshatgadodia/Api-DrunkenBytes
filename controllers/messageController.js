@@ -28,7 +28,7 @@ const getMessages = asyncHandler(async (req, res, next) => {
   .sort({ date: -1 })
   .populate({ path: "messageBy", select: ["name"] })
   .select({message:0, type:0});
-  
+  console.log(messages);
   res.status(201).json({
     success: true,
     data: {
