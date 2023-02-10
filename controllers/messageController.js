@@ -20,7 +20,9 @@ const saveMessage = asyncHandler(async (req, res, next) => {
 });
 
 const getMessages = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find({})
+  const skip=Math.max((req.query.currentpage-1)*10,0)
+  const messages = await Message.find({}).limit(10).skip(skip)
+    .populate({ path: "messageBy", select: ["name"] })
     .select({ messageBy: 1, _id: 1, type: 1, subject: 1, date: 1 })
     .sort({ date: -1 });
   res.status(201).json({
