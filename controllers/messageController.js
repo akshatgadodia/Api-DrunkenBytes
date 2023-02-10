@@ -20,15 +20,13 @@ const saveMessage = asyncHandler(async (req, res, next) => {
 });
 
 const getMessages = asyncHandler(async (req, res, next) => {
-  const skip=Math.max((req.query.currentpage-1)*10,0)
   let searchParameter = {};
   // if (req.roles.includes(3894)) searchParameter = {type: "Editor"};
   // else if (req.roles.includes(7489)) searchParameter = { type: "Support" };
-  const messages = await Message.find({}).limit(10).skip(skip)
+  const messages = await Message.find(searchParameter).limit(10).skip((req.query.currentPage-1)*10)
   .sort({ date: -1 })
   .populate({ path: "messageBy", select: ["name"] })
   .select({message:0, type:0});
-  console.log(messages);
   res.status(201).json({
     success: true,
     data: {
