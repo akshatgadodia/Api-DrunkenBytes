@@ -92,7 +92,17 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+const logoutSupportUser = asyncHandler(async (req, res, next) => {
+  res.clearCookie('supportUserAccessToken');
+  res.clearCookie('supportUserRole');
+  res.status(200).json({
+    success: true,
+    data: { message: "Successfully Logged Out" }
+  });
+});
+
 module.exports = {
   registerSupportUser,
-  loginSupportUser
+  loginSupportUser,
+  logoutSupportUser
 };

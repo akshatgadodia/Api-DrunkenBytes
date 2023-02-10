@@ -71,10 +71,21 @@ const getTransactions = asyncHandler(async (req, res, next) => {
     }
   });
 });
-
+const getAllTransactions = asyncHandler(async (req, res, next) => {
+  const transactions = await Transaction.find({})
+  .populate({ path: "createdBy", select: ["name", "_id"] })
+  ;
+  res.status(200).json({
+    success: true,
+    data: {
+      transactions
+    }
+  });
+});
 module.exports = {
   addTransaction,
   repeatTransaction,
   getTransactions,
-  getTransactionsByUserID
+  getTransactionsByUserID,
+  getAllTransactions
 };
