@@ -10,7 +10,7 @@ const userSchema = new Schema({
   },
   name: { type: String, required: false },
   email: { type: String, trim: true, lowercase: true, required: false },
-  walletBalance : { type: Number, default:0.0001},
+  walletBalance: { type: Number, default: 0.0001 },
   roles: { type: Object }
 });
 
