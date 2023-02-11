@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const transactionSchema = new Schema({
+const nftTransactionSchema = new Schema({
   txId: {
     type: String,
     unique: true,
@@ -23,4 +23,4 @@ const transactionSchema = new Schema({
   methodType: Number
 });
 
-module.exports = new mongoose.model("transaction", transactionSchema);
+module.exports = new mongoose.model("nft-transaction", nftTransactionSchema);

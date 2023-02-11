@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
-const Transaction = require("../models/Transaction");
+const Transaction = require("../models/NftTransaction");
 
 const getPerformanceData = asyncHandler(async (req, res, next) => {
   // console.log(req.body);

@@ -1,7 +1,7 @@
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
-const Transaction = require("../models/Transaction");
+const NftTransaction = require("../models/NftTransaction");
 
 const { web3 } = require("../config/web3");
 const {
@@ -20,37 +20,30 @@ const verifyUser = asyncHandler(async (req, next) => {
   let user;
   if (req.roles.includes(1541) || req.roles.includes(7489)) {
     user = await User.findOne({ _id: req.body.createdBy });
+
   } else {
     user = await User.findOne({ _id: req.userId });
-    if (!user) return next(new ErrorResponse("Invalid Access Token", 403));
+    if (user==null) return next(new ErrorResponse("Invalid Access Token", 403));
   }
-  if (user.walletBalance <= 0) {
-    return next(new ErrorResponse("Plan Limit Exceeded", 403));
-  }
-  return true;
+  return { user, status: true };
 });
 
-const signWeb3Transaction = async (res, next, dataToStore) => {
+const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
   try {
     const storedDataLink = await saveDataOnIPFS(dataToStore);
     const contract = await new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
     const networkId = await web3.eth.net.getId();
     let tx;
-    if (dataToStore.methodType === 0) {
+    if (dataToStore.methodType === 1) {
       tx = await contract.methods.safeMint(
         dataToStore.buyerMetamaskAddress,
         storedDataLink
       );
-    } else if (dataToStore.methodType === 1) {
-      // tx = await contract.methods.safeMint(
-      //   dataToStore.buyerMetamaskAddress,
-      //   storedDataLink
-      // );
     } else {
-      // tx = await contract.methods.safeMint(
-      //   dataToStore.buyerMetamaskAddress,
-      //   storedDataLink
-      // );
+      tx = await contract.methods.safeMint(
+        dataToStore.buyerMetamaskAddress,
+        storedDataLink
+      );
     }
     const data = tx.encodeABI();
     const gas = await tx.estimateGas({
@@ -60,6 +53,13 @@ const signWeb3Transaction = async (res, next, dataToStore) => {
     });
     const gasPrice = await web3.eth.getGasPrice();
     // const price = web3.utils.toHex(web3.utils.toWei('1', 'gwei'));
+    const transactionCost = gasPrice * gas;
+    if (
+      walletBalance <=
+      (await web3.utils.fromWei(transactionCost.toString(), "ether"))
+    ) {
+      return next(new ErrorResponse("Plan Limit Exceeded", 403));
+    }
     const nonce = await web3.eth.getTransactionCount(
       ACCOUNT_ADDRESS,
       "pending"
@@ -151,10 +151,15 @@ const storeTransactionDataAndDecreaseUserBalance = async (req, data) => {
       value: data.value,
       methodType: data.methodType
     };
-    await new Transaction(transactionData).save();
+    await new NftTransaction(transactionData).save();
     if (data.status !== "Failed") {
       await User.findOneAndUpdate(
-        { _id: (req.roles.includes(1541) || req.roles.includes(7489)) ? req.body.createdBy : req.userId },
+        {
+          _id:
+            req.roles.includes(1541) || req.roles.includes(7489)
+              ? req.body.createdBy
+              : req.userId
+        },
         { $inc: { walletBalance: -data.value } }
       );
     }
@@ -166,12 +171,12 @@ const storeTransactionDataAndDecreaseUserBalance = async (req, data) => {
 
 const processNFT = async (req, res, next) => {
   //Verifying the limit or authenticity
-  const verifyResult = await verifyUser(req, next);
-  if (verifyResult) {
+  const { user, status } = await verifyUser(req, next);
+  if (status) {
     //Creating Data Object
     const dataToStore = {
-      sellerEmail: req.body.sellerEmail,
-      sellerName: req.body.sellerName,
+      sellerEmail: user.email,
+      sellerName: user.name,
       buyerName: req.body.buyerName,
       buyerEmail: req.body.buyerEmail,
       brandName: req.body.brandName,
@@ -180,25 +185,35 @@ const processNFT = async (req, res, next) => {
       warrantyExpireDate: req.body.warrantyExpireDate,
       buyerMetamaskAddress: req.body.buyerMetamaskAddress,
       accountAddress: req.userMetamask,
-      methodType: 0
+      methodType: req.body.methodType
     };
     //Generating and Signing Web3 Transaction
-    const signedTx = await signWeb3Transaction(res, next, dataToStore);
-    //Sending Web3 Transaction to Blockchain
-    const { result, tokenId, value } = await sendSignedWeb3Transaction(
-      signedTx,
-      dataToStore
+    const signedTx = await signWeb3Transaction(
+      res,
+      next,
+      dataToStore,
+      user.walletBalance
     );
-    //Storing the result  on the database and decreasing the hits value
-    await storeTransactionDataAndDecreaseUserBalance(req, {
-      ...dataToStore,
-      txId: signedTx.transactionHash,
-      tokenId,
-      status: result,
-      createdBy:  (req.roles.includes(1541) || req.roles.includes(7489)) ? req.body.createdBy :req.userId,
-      dateCreated: new Date(),
-      value
-    });
+    if (signedTx !== undefined) {
+      //Sending Web3 Transaction to Blockchain
+      const { result, tokenId, value } = await sendSignedWeb3Transaction(
+        signedTx,
+        dataToStore
+      );
+      //Storing the result  on the database and decreasing the hits value
+      await storeTransactionDataAndDecreaseUserBalance(req, {
+        ...dataToStore,
+        txId: signedTx.transactionHash,
+        tokenId,
+        status: result,
+        createdBy:
+          req.roles.includes(1541) || req.roles.includes(7489)
+            ? req.body.createdBy
+            : req.userId,
+        dateCreated: new Date(),
+        value
+      });
+    }
   }
 };
 

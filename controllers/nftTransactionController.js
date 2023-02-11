@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
-const Transaction = require("../models/Transaction");
+const NftTransaction = require("../models/NftTransaction");
 const { processNFT } = require("./nftController");
 
 const addTransaction = async data => {
@@ -22,7 +22,7 @@ const addTransaction = async data => {
       value: data.value,
       methodType: data.methodType
     };
-    await new Transaction(transactionData).save();
+    await new NftTransaction(transactionData).save();
   } catch (err) {
     console.log("Transaction Storing Failed");
     console.log(err);
@@ -31,7 +31,7 @@ const addTransaction = async data => {
 
 const repeatTransaction = asyncHandler(async (req, res, next) => {
   const txId = req.body.txId;
-  const transactionData = await Transaction.findOne({ txId });
+  const transactionData = await NftTransaction.findOne({ txId });
   if (!transactionData)
     return next(new ErrorResponse("Invalid Transaction ID", 404));
   if (
@@ -52,7 +52,7 @@ const repeatTransaction = asyncHandler(async (req, res, next) => {
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
   const createdBy = req.body.userId;
-  const transactions = await Transaction.find({ createdBy });
+  const transactions = await NftTransaction.find({ createdBy });
   res.status(200).json({
     success: true,
     data: {
@@ -63,7 +63,7 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
 
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
-  const transactions = await Transaction.find({ createdBy });
+  const transactions = await NftTransaction.find({ createdBy });
   res.status(200).json({
     success: true,
     data: {
@@ -71,21 +71,38 @@ const getTransactions = asyncHandler(async (req, res, next) => {
     }
   });
 });
+
 const getAllTransactions = asyncHandler(async (req, res, next) => {
-  const transactions = await Transaction.find({})
-  .populate({ path: "createdBy", select: ["name", "_id"] })
-  ;
+  const transactions = await NftTransaction.find({})
+  .populate({ path: "createdBy", select: ["name", "_id"] });
+  const totalTransactions = await NftTransaction.countDocuments({});
   res.status(200).json({
     success: true,
     data: {
-      transactions
+      transactions,
+      totalTransactions
     }
   });
 });
+
+const getTransaction = asyncHandler(async (req, res, next) => {
+  const txId = req.query.transactionHash
+  const transaction = await NftTransaction.findOne({ txId })
+  .populate({ path: "createdBy", select: ["name", "_id"] });
+
+  res.status(200).json({
+    success: true,
+    data: {
+      transaction
+    }
+  });
+});
+
 module.exports = {
   addTransaction,
   repeatTransaction,
   getTransactions,
   getTransactionsByUserID,
-  getAllTransactions
+  getAllTransactions,
+  getTransaction
 };
