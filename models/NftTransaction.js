@@ -15,7 +15,7 @@ const nftTransactionSchema = new Schema({
   productName: String,
   productId: String,
   tokenId: Number,
-  warrantyExpireDate: String,
+  warrantyExpireDate: Date,
   status: String,
   buyerMetamaskAddress: String,
   dateCreated: Date,

@@ -57,4 +57,37 @@ const updateUserData = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { loginUser, updateUserData };
+
+const getUser = asyncHandler(async (req, res, next) => {
+  const userId = req.query.userId;
+  const user = await User.findOne({ _id: userId });
+  res.status(200).json({
+    success: true,
+    data: {
+      user
+    }
+  });
+});
+
+const getAllUsers = asyncHandler(async (req, res, next) => {
+  const { q, page, size } = req.query;
+  let l = [];
+  if (q) {
+    const s = q.split(",");
+    s.forEach(element => {
+      l.push(JSON.parse(element));
+    });
+  }
+  const users = await User.find({ $and: l })
+    .skip((page - 1) * size)
+    .limit(size)
+  const totalUsers = await User.countDocuments({ $and: l });
+  res.status(200).json({
+    success: true,
+    data: {
+      users,
+      totalUsers
+    }
+  });
+});
+module.exports = { loginUser, updateUserData, getUser, getAllUsers };

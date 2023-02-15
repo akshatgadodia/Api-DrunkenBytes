@@ -44,15 +44,26 @@ const repeatTransaction = asyncHandler(async (req, res, next) => {
         403
       )
     );
-  // console.log(transactionData);
   req.body = Object.assign(transactionData);
-  // console.log(req.body);
   await processNFT(req, res, next);
 });
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
-  const createdBy = req.body.userId;
-  const transactions = await NftTransaction.find({ createdBy });
+  const createdBy = req.query.createdBy;
+  const { q, page, size } = req.query;
+  let l = [];
+  if (q) {
+    const s = q.split(",");
+    s.forEach(element => {
+      l.push(JSON.parse(element));
+    });
+  }
+  l.push({
+    createdBy: createdBy
+  })
+  const transactions = await NftTransaction.find({ $and: l })
+  .skip((page - 1) * size)
+  .limit(size)
   res.status(200).json({
     success: true,
     data: {
@@ -73,19 +84,19 @@ const getTransactions = asyncHandler(async (req, res, next) => {
 });
 
 const getAllTransactions = asyncHandler(async (req, res, next) => {
-  const {q,page,size}=req.query
-  let l=[]
-  if(q)
-  {
-    const s=q.split(",")
+  const { q, page, size } = req.query;
+  let l = [];
+  if (q) {
+    const s = q.split(",");
     s.forEach(element => {
-      l.push(JSON.parse(element))
+      l.push(JSON.parse(element));
     });
   }
-  const transactions = await NftTransaction.find({$and:l}).skip((page-1)*size).limit(size)
-  .populate({ path: "createdBy", select: ["name", "_id"] });
-  const totalTransactions = transactions.length;
-  console.log(transactions,totalTransactions);
+  const transactions = await NftTransaction.find({ $and: l })
+    .skip((page - 1) * size)
+    .limit(size)
+    .populate({ path: "createdBy", select: ["name", "_id"] });
+  const totalTransactions = await NftTransaction.countDocuments({ $and: l });
   res.status(200).json({
     success: true,
     data: {
@@ -96,9 +107,11 @@ const getAllTransactions = asyncHandler(async (req, res, next) => {
 });
 
 const getTransaction = asyncHandler(async (req, res, next) => {
-  const txId = req.query.transactionHash
-  const transaction = await NftTransaction.findOne({ txId })
-  .populate({ path: "createdBy", select: ["name", "_id"] });
+  const txId = req.query.transactionHash;
+  const transaction = await NftTransaction.findOne({ txId }).populate({
+    path: "createdBy",
+    select: ["name", "_id"]
+  });
 
   res.status(200).json({
     success: true,
