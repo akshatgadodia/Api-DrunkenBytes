@@ -49,25 +49,32 @@ const repeatTransaction = asyncHandler(async (req, res, next) => {
 });
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
-  const createdBy = req.query.createdBy;
-  const { q, page, size } = req.query;
-  let l = [];
-  if (q) {
-    const s = q.split(",");
-    s.forEach(element => {
-      l.push(JSON.parse(element));
+  const { q, createdBy, page, size } = req.query;
+  let searchParameters = [];
+  if (q !== "{}" && q !== "") {
+    const queryParameters = q.split(",");
+    queryParameters.forEach(element => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      if (key === "tokenId") searchParameters.push({ [key]: value });
+      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  l.push({
+  searchParameters.push({
     createdBy: createdBy
-  })
-  const transactions = await NftTransaction.find({ $and: l })
-  .skip((page - 1) * size)
-  .limit(size)
+  });
+  const transactions = await NftTransaction.find({ $and: searchParameters })
+    .skip((page - 1) * size)
+    .limit(size);
+  const totalTransactions = await NftTransaction.countDocuments({
+    $and: searchParameters
+  });
   res.status(200).json({
     success: true,
     data: {
-      transactions
+      transactions,
+      totalTransactions
     }
   });
 });
@@ -75,28 +82,36 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
   const transactions = await NftTransaction.find({ createdBy });
+  const totalTransactions = await NftTransaction.countDocuments({ createdBy });
   res.status(200).json({
     success: true,
     data: {
-      transactions
+      transactions,
+      totalTransactions
     }
   });
 });
 
 const getAllTransactions = asyncHandler(async (req, res, next) => {
   const { q, page, size } = req.query;
-  let l = [];
-  if (q) {
-    const s = q.split(",");
-    s.forEach(element => {
-      l.push(JSON.parse(element));
+  let searchParameters = [];
+  if (q !== "{}" && q !== "") {
+    const queryParameters = q.split(",");
+    queryParameters.forEach(element => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      if (key === "tokenId") searchParameters.push({ [key]: value });
+      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  const transactions = await NftTransaction.find({ $and: l })
+  const transactions = await NftTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
     .limit(size)
     .populate({ path: "createdBy", select: ["name", "_id"] });
-  const totalTransactions = await NftTransaction.countDocuments({ $and: l });
+  const totalTransactions = await NftTransaction.countDocuments({
+    $and: searchParameters
+  });
   res.status(200).json({
     success: true,
     data: {

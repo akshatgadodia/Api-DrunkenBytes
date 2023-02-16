@@ -71,17 +71,20 @@ const getUser = asyncHandler(async (req, res, next) => {
 
 const getAllUsers = asyncHandler(async (req, res, next) => {
   const { q, page, size } = req.query;
-  let l = [];
-  if (q) {
-    const s = q.split(",");
-    s.forEach(element => {
-      l.push(JSON.parse(element));
+  let searchParameters = [];
+  if (q !== "{}" && q !== "") {
+    const queryParameters = q.split(",");
+    queryParameters.forEach(element => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  const users = await User.find({ $and: l })
+  const users = await User.find({ $and: searchParameters })
     .skip((page - 1) * size)
     .limit(size)
-  const totalUsers = await User.countDocuments({ $and: l });
+  const totalUsers = await User.countDocuments({ $and: searchParameters });
   res.status(200).json({
     success: true,
     data: {
