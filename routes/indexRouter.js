@@ -26,4 +26,10 @@ router.use("/v1/admin-dashboard", adminDashboardRoute);
 const messageRoute = require("./messageRoute");
 router.use("/v1/message", messageRoute);
 
+const articleRoute = require("./articleRoute");
+router.use("/v1/article", articleRoute);
+
+const blogRoute = require("./blogRoute");
+router.use("/v1/blog", blogRoute);
+
 module.exports = router;
