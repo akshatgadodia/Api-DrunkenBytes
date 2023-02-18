@@ -58,7 +58,7 @@ const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
       walletBalance <=
       (await web3.utils.fromWei(transactionCost.toString(), "ether"))
     ) {
-      return next(new ErrorResponse("Plan Limit Exceeded", 403));
+      return next(new ErrorResponse("Insufficient Wallet Balance", 403));
     }
     const nonce = await web3.eth.getTransactionCount(
       ACCOUNT_ADDRESS,
