@@ -21,8 +21,8 @@ const supportOrigin = [
   "https://support-drunkenbytes.vercel.app"
 ];
 const mainOrigin = [
-  "http://localhost:3001/",
-  "http://localhost:3001",
+  "http://localhost:3005/",
+  "http://localhost:3005",
   "https://drunkenbytes.vercel.app/",
   "https://drunkenbytes.vercel.app"
 ];

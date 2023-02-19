@@ -34,14 +34,17 @@ const loginUser = asyncHandler(async (req, res, next) => {
     sameSite: 'none', // set to none for cross-request
     httpOnly: true
   });
-  res.cookie("userRole", "USER",{
-    // expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
-    secure: true, // set to true if your using https or samesite is none
-    sameSite: 'none', // set to none for cross-request
-  });
   res.status(200).json({
     success: true,
     data: { message: "Successfully Logged In", accessToken }
+  });
+});
+
+const logoutUser = asyncHandler(async (req, res, next) => {
+  res.clearCookie('userAccessToken');
+  res.status(200).json({
+    success: true,
+    data: { message: "Successfully Logged Out" }
   });
 });
 
@@ -93,4 +96,4 @@ const getAllUsers = asyncHandler(async (req, res, next) => {
     }
   });
 });
-module.exports = { loginUser, updateUserData, getUser, getAllUsers };
+module.exports = { loginUser, updateUserData, getUser, getAllUsers, logoutUser };
