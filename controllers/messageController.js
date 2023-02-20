@@ -9,7 +9,9 @@ const saveMessage = asyncHandler(async (req, res, next) => {
     subject: req.body.subject,
     type: req.body.type,
     message: req.body.message,
-    date: new Date()
+    date: new Date(),
+    name: req.body.name,
+    email: req.body.email
   }).save();
   res.status(200).json({
     success: true,
