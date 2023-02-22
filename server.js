@@ -4,6 +4,7 @@ require("dotenv").config();
 //Connecting the database
 const connectDB = require("./config/db");
 connectDB();
+const path=require("path")
 
 //Creating express server
 const express = require("express");
@@ -26,6 +27,7 @@ const mainOrigin = [
   "https://drunkenbytes.vercel.app/",
   "https://drunkenbytes.vercel.app"
 ];
+app.use("/images",express.static(path.join(__dirname,"/public/images")))
 app.use((req, res, next) => {
   const origin = req.get("origin");
   const isWhitelisted =

@@ -29,6 +29,9 @@ router.use("/v1/message", messageRoute);
 const articleRoute = require("./articleRoute");
 router.use("/v1/article", articleRoute);
 
+const imageRoute = require("./imageRoute");
+router.use("/v1/image", imageRoute);
+
 const blogRoute = require("./blogRoute");
 router.use("/v1/blog", blogRoute);
 
