@@ -5,7 +5,7 @@ const Message = require("../models/Message");
 
 const saveMessage = asyncHandler(async (req, res, next) => {
   await new Message({
-    messageBy: req.body.messageBy || req.userId,
+    messageBy: req.userId,
     subject: req.body.subject,
     type: req.body.type,
     message: req.body.message,

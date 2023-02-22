@@ -23,6 +23,12 @@ const messageSchema = new Schema({
   isRead: {
     type: Boolean,
     default: false
+  },
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
   }
 });
 

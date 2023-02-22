@@ -79,12 +79,10 @@ app.use((req, res, next) => {
 const indexRouter = require("./routes/indexRouter");
 app.use("/", indexRouter);
 
-app.get("/", async (req, res) => {
-  res.status(201).send(`
-    <div style='width:100%; height:100%; display:flex; justify-content:center; align-items:center;'>
-        <h1>Welcome to NFT based Warranty System by Drunken Bytes</h1>
-    </div>
-    `);
+//Redirect on 404
+app.get('*', function(req, res){
+  // res.status(404).send('what???');
+  res.redirect('https://drunkenbytes.vercel.app/');
 });
 
 // Error Handler
@@ -95,6 +93,3 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// Export the Express API
-module.exports = app;
