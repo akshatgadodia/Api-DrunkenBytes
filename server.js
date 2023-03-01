@@ -27,7 +27,8 @@ const mainOrigin = [
   "https://drunkenbytes.vercel.app/",
   "https://drunkenbytes.vercel.app"
 ];
-app.use("/images",express.static(path.join(__dirname,"/public/images")))
+app.use("/v1/public/images",express.static(path.join(__dirname,"/public/images")))
+
 app.use((req, res, next) => {
   const origin = req.get("origin");
   const isWhitelisted =
@@ -62,8 +63,9 @@ app.use((req, res, next) => {
 //Cookie Parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+
 //Using Express.JSON
-app.use(express.json());
+// app.use(express.json());
 
 app.use((req, res, next) => {
   const origin = req.get("origin");
