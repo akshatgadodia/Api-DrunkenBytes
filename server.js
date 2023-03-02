@@ -13,52 +13,13 @@ const app = express();
 //Specifying the port
 const port = process.env.PORT || 5000;
 
-//Middlewares
-//Enabling CORS
-const supportOrigin = [
-  "http://localhost:3000/",
-  "http://localhost:3000",
-  "https://support-drunkenbytes.vercel.app/",
-  "https://support-drunkenbytes.vercel.app"
-];
-const mainOrigin = [
-  "http://localhost:3005/",
-  "http://localhost:3005",
-  "https://drunkenbytes.vercel.app/",
-  "https://drunkenbytes.vercel.app"
-];
-app.use("/v1/public/images",express.static(path.join(__dirname,"/public/images")))
+// Serving Static Folder
+app.use("/v1/public/images", express.static(path.join(__dirname,"/public/images")))
 
-app.use((req, res, next) => {
-  const origin = req.get("origin");
-  const isWhitelisted =
-    supportOrigin.includes(origin) || mainOrigin.includes(origin);
-  if (isWhitelisted) {
-    res.setHeader("Access-Control-Allow-Origin", req.get("origin"));
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,Content-Type,Authorization"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", true);
-  } else {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,Content-Type,Authorization"
-    );
-  }
-  // Pass to next layer of middleware
-  if (req.method === "OPTIONS") res.sendStatus(200);
-  else next();
-});
+// Middlewares
+// CORS Handler
+const corsHandler = require("./middlewares/corsHandler");
+app.use(corsHandler);
 
 //Cookie Parser
 const cookieParser = require("cookie-parser");
@@ -67,17 +28,9 @@ app.use(cookieParser());
 //Using Express.JSON
 app.use(express.json());
 
-app.use((req, res, next) => {
-  const origin = req.get("origin");
-  if (supportOrigin.includes(origin)) {
-    req.originSource = "SUPPORT";
-  } else if (mainOrigin.includes(origin)) {
-    req.originSource = "MAIN";
-  } else {
-    req.originSource = "ANOTHER"
-  }
-  next();
-});
+// Origin Assigner
+const originAssigner = require("./middlewares/originAssigner");
+app.use(originAssigner);
 
 //Routes
 const indexRouter = require("./routes/indexRouter");

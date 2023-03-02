@@ -72,20 +72,20 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
     else{
       role = "USER"
     }
-    res.cookie("supportUserAccessToken", accessToken,{
+    res.cookie("supportUserAccessToken", accessToken, {
       expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
       secure: true, // set to true if your using https or samesite is none
       sameSite: 'none', // set to none for cross-request
       httpOnly: true
     });
-    res.cookie("supportUserRole", role,{
-      expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
-      secure: true, // set to true if your using https or samesite is none
-      sameSite: 'none', // set to none for cross-request
-    });
+    // res.cookie("supportUserRole", role, {
+    //   expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
+    //   secure: true, // set to true if your using https or samesite is none
+    //   sameSite: 'none', // set to none for cross-request
+    // });
     res.status(200).json({
       success: true,
-      data: { message: "Successfully Logged In", accessToken }
+      data: { message: "Successfully Logged In", role }
     });
   } else {
     return next(new ErrorResponse("Invalid Login Details", 401));
@@ -94,7 +94,7 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
 
 const logoutSupportUser = asyncHandler(async (req, res, next) => {
   res.clearCookie('supportUserAccessToken');
-  res.clearCookie('supportUserRole');
+  // res.clearCookie('supportUserRole');
   res.status(200).json({
     success: true,
     data: { message: "Successfully Logged Out" }

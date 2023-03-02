@@ -23,9 +23,24 @@ const saveMessage = asyncHandler(async (req, res, next) => {
 
 const getMessages = asyncHandler(async (req, res, next) => {
   let searchParameter = {};
-  // if (req.roles.includes(3894)) searchParameter = {type: "Editor"};
+  if (req.roles.includes(1541)) searchParameter = {};
+  else if (req.roles.includes(7489)) searchParameter = { type: "Support" };
+  else if (req.roles.includes(3894)) searchParameter = {type: "Editor"};
   // else if (req.roles.includes(7489)) searchParameter = { type: "Support" };
   const messages = await Message.find(searchParameter).limit(10).skip((req.query.currentPage-1)*10)
+  .sort({ date: -1 })
+  .populate({ path: "messageBy", select: ["name"] })
+  .select({message:0, type:0});
+  res.status(201).json({
+    success: true,
+    data: {
+      messages: messages
+    }
+  });
+});
+
+const getDashboardMessages = asyncHandler(async (req, res, next) => {
+  const messages = await Message.find({}).limit(10).skip((req.query.currentPage-1)*10)
   .sort({ date: -1 })
   .populate({ path: "messageBy", select: ["name"] })
   .select({message:0, type:0});
@@ -47,4 +62,4 @@ const getMessageById = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { saveMessage, getMessages, getMessageById };
+module.exports = { saveMessage, getMessages, getMessageById, getDashboardMessages };

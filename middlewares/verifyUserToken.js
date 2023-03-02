@@ -16,6 +16,7 @@ const verifyUserToken = (req, res, next) => {
     token = req.cookies["supportUserAccessToken"];
     if (token === undefined || token === null) return next(new ErrorResponse("Session Expired", 404));
   }
+
   jwt.verify(token, process.env.D_B_SECRET_KEY, (err, decoded) => {
     // console.log(decoded)
     if (err) return next(new ErrorResponse("Invalid token", 403));
