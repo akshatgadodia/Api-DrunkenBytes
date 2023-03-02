@@ -12,15 +12,18 @@ const blogSchema = new Schema({
     unique:true,
     required: [true, "Blog url is required"]
   },
+  photo:{
+    type:String,
+    required:true,
+  },
   content:[
     {
         blocks:[
             {
                 data:{
-                        text:{
-                            type:String,
-                            required:true
-                        }
+                        
+                      type:Object,
+                      required:true
                 },
                 id:{
                     type:String,

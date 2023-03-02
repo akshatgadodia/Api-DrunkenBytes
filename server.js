@@ -65,7 +65,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 //Using Express.JSON
-// app.use(express.json());
+app.use(express.json());
 
 app.use((req, res, next) => {
   const origin = req.get("origin");

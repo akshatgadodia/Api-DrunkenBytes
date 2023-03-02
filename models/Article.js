@@ -12,15 +12,17 @@ const articleSchema = new Schema({
     unique:true,
     required: [true, "Article url is required"]
   },
+  photo:{
+    type:String,
+    required:true,
+  },
   content:[
     {
         blocks:[
             {
                 data:{
-                        text:{
-                            type:String,
-                            required:true
-                        }
+                        type:Object,
+                        required:true
                 },
                 id:{
                     type:String,
