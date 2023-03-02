@@ -9,48 +9,21 @@ const articleSchema = new Schema({
   },
   url: {
     type: String,
-    unique:true,
+    unique: true,
     required: [true, "Article url is required"]
   },
-  photo:{
-    type:String,
-    required:true,
+  image: {
+    type: String,
+    required: [true, "Article image is required"]
   },
-  content:[
-    {
-        blocks:[
-            {
-                data:{
-                        type:Object,
-                        required:true
-                },
-                id:{
-                    type:String,
-                    required:true
-                },
-                type:{
-                    type:String,
-                    required:true
-                }
-            }
-        ],
-        version:{
-            type:String,
-            required:true,
-        },
-        time:{
-            type:Number,
-            required:true
-        }
-    },
-],
-  dateCreated:{
-    type:Date,
-    default:Date.now,
+  content: Object,
+  dateCreated: {
+    type: Date,
+    default: Date.now,
   },
-  dateUpdated:{
-    type:Date,
-    default:Date.now,
+  dateUpdated: {
+    type: Date,
+    default: Date.now,
   }
 });
 

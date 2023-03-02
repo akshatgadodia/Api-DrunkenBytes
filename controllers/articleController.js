@@ -19,23 +19,23 @@ const getArticles = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {
-      messages: articles
+      articles: articles
     }
   });
 });
 
 const getArticlesByUrl = asyncHandler(async (req, res, next) => {
-  const articles = await Article.find({ url: req.body.url });
+  const article = await Article.findOne({ url: req.query.url });
   res.status(201).json({
     success: true,
     data: {
-      message: articles
+      article: article
     }
   });
 });
 
 const updateArticle = asyncHandler(async (req, res, next) => {
-    req.body.dateUpdated= new Date()
+    req.body.dateUpdated = new Date()
     const article = await Article.updateOne({ url: req.body.url },{$set:req.body},{new:true});
     console.log(article);
     res.status(201).json({
