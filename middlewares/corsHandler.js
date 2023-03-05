@@ -11,10 +11,21 @@ const corsHandler = (req, res, next) => {
         "https://drunkenbytes.vercel.app/",
         "https://drunkenbytes.vercel.app"
     ];
-
+    const claimsOrigin = [
+        "http://localhost:3006/",
+        "http://localhost:3006",
+        "https://claims-drunkenbytes.vercel.app/",
+        "https://claims-drunkenbytes.vercel.app"
+    ];
+    const careersOrigin = [
+        "http://localhost:3007/",
+        "http://localhost:3007",
+        "https://careers-drunkenbytes.vercel.app/",
+        "https://careers-drunkenbytes.vercel.app"
+    ];
     const origin = req.get("origin");
     const isWhitelisted =
-        supportOrigin.includes(origin) || mainOrigin.includes(origin);
+        supportOrigin.includes(origin) || mainOrigin.includes(origin) || claimsOrigin.includes(origin) || careersOrigin.includes(origin);
     if (isWhitelisted) {
         res.setHeader("Access-Control-Allow-Origin", req.get("origin"));
         res.setHeader(

@@ -35,4 +35,7 @@ router.use("/v1/image", imageRoute);
 const blogRoute = require("./blogRoute");
 router.use("/v1/blog", blogRoute);
 
+const claimsRoute = require("./claimsRoute");
+router.use("/v1/claims", claimsRoute);
+
 module.exports = router;

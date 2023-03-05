@@ -5,12 +5,9 @@ pragma solidity >=0.4.0 <0.9.0;
 
 import "./NFT.sol";
 import "./ERC721URIStorage.sol";
-import "./Counters.sol";
 
 
 contract NFTCreation is NFT, ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
 
     address public owner ; 
 
@@ -18,9 +15,7 @@ contract NFTCreation is NFT, ERC721URIStorage {
         owner = msg.sender;
     }
 
-    function safeMint(address to, string memory uri) public returns(uint){
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
+    function safeMint(address to, uint tokenId, string memory uri) public returns(uint){
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
         return tokenId;
