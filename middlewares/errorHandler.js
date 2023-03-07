@@ -1,4 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
+const logger = require("../config/logger");
 
 const errorHandler = (err, req, res, next) => {
   console.log(err);
@@ -28,7 +29,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   // add more check...
-
+  logger.error(error.message || "Internal Server Error");
   res.status(error.statusCode || 500).json({
     success: false,
     data: { error: error.message || "Internal Server Error" }

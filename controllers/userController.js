@@ -8,6 +8,25 @@ const { web3 } = require("../config/web3");
 
 const initialLoginUser = asyncHandler(async (req, res, next) => {
   const accountAddress = req.body.accountAddress;
+  let user = await User.findOne({ accountAddress });
+  if (!user){ 
+    res.status(201).json({
+      success: true,
+      data: {
+        message: "Business Not Found"
+      }
+    });
+  return null;
+  }
+  if (!user.verified){ 
+    res.status(201).json({
+      success: true,
+      data: {
+        message: "User Not Verified"
+      }
+    });
+  return null;
+  }
   const message = `
 Welcome to Drunken Bytes!\n
 Click to sign in and accept the OpenSea Terms of Service: https://drunkenbytes.vercel.app/terms-of-service\n
@@ -29,16 +48,8 @@ ${uuidv4()}
 const loginUser = asyncHandler(async (req, res, next) => {
   const recoveredAddress = await web3.eth.accounts.recover(req.body.message.toString(), req.body.signedData.toString());
   if (recoveredAddress !== req.body.accountAddress) return next(new ErrorResponse("Invalid User", 403));;
-  let user = await User.findOne({ accountAddress: req.body.accountAddress });
-  if (!user) {
-    const data = {
-      ...req.body,
-      roles: {
-        USER: 6541
-      }
-    };
-    user = await new User(data).save();
-  }
+  const user = await User.findOne({ accountAddress: req.body.accountAddress });
+  if (!user) return next(new ErrorResponse("Business Not Found", 404));
   const roles = Object.values(user.roles);
   const accessToken = jwt.sign(
     {
@@ -96,6 +107,16 @@ const getUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getUserProfile = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ _id: req.userId });
+  res.status(200).json({
+    success: true,
+    data: {
+      user
+    }
+  });
+});
+
 const getAllUsers = asyncHandler(async (req, res, next) => {
   const { q, page, size } = req.query;
   let searchParameters = [];
@@ -120,4 +141,22 @@ const getAllUsers = asyncHandler(async (req, res, next) => {
     }
   });
 });
-module.exports = { loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser };
+
+const saveUserRegisterRequest = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({accountAddress: req.body.accountAddress});
+  if(user?.accountAddress) return next(new ErrorResponse("User Already Exists", 409));;
+  const data = {
+    ...req.body,
+    roles: {
+      USER: 6541
+    }
+  };
+  await new User(data).save();
+  res.status(200).json({
+    success: true,
+    data: {
+      message: "Registration Request Successfully Accepted"
+    }
+  });
+});
+module.exports = { loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser, saveUserRegisterRequest, getUserProfile };

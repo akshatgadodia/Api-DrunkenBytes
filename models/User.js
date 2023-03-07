@@ -8,10 +8,13 @@ const userSchema = new Schema({
     unique: true,
     required: [true, "Account Address is required"]
   },
+  logo: { type: String, required: false },
   name: { type: String, required: false },
   email: { type: String, trim: true, lowercase: true, required: false },
   walletBalance: { type: Number, default: 0.0001 },
-  roles: { type: Object }
+  roles: { type: Object },
+  verified: {type: Boolean, default: false},
+  verifiedBy: { type: Schema.Types.ObjectId, ref: "supportUser" },
 });
 
 module.exports = new mongoose.model("user", userSchema);

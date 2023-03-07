@@ -1,10 +1,13 @@
 //Configuring Dotenv to use environment variables from .env file
 require("dotenv").config();
 
+//Import Modules
+const path = require("path")
+const logger = require("./config/logger");
+
 //Connecting the database
 const connectDB = require("./config/db");
 connectDB();
-const path=require("path")
 
 //Creating express server
 const express = require("express");
@@ -15,8 +18,16 @@ const port = process.env.PORT || 5000;
 
 // Serving Static Folder
 app.use("/v1/public/images", express.static(path.join(__dirname,"/public/images")))
+app.use("/v1/logs", express.static(path.join(__dirname,"/logs")))
 
 // Middlewares
+// Log Requests
+app.use((req, res, next) => {
+  const message = `${req.method} ${req.url}`;
+  logger.info(message);
+  next();
+});
+
 // CORS Handler
 const corsHandler = require("./middlewares/corsHandler");
 app.use(corsHandler);

@@ -223,6 +223,7 @@ const processNFT = async (req, res, next) => {
 
 const estimateNFTGenerationCost = async (req, res, next) => {
   const gasPrice = await web3.eth.getGasPrice();
+  console.log(gasPrice)
   const transactionCost = await web3.utils.fromWei((gasPrice * 152122).toString(), "ether");
   res.status(201).json({
     success: true,
