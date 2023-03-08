@@ -35,8 +35,10 @@ router.use("/v1/image", imageRoute);
 const blogRoute = require("./blogRoute");
 router.use("/v1/blog", blogRoute);
 
+const productRoute = require("./productRoute");
+router.use("/v1/product", productRoute);
+
 const downloadRoute = require("./downloadRoute");
 router.use("/v1/download", downloadRoute);
-
 
 module.exports = router;

@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 const WalletTransaction = require("../models/WalletTransaction");
+const { web3 } = require("../config/web3");
+const User = require("../models/User");
 
-const addTransaction = async data => {
+const addTransaction = asyncHandler(async data => {
   try {
     const transactionData = {
       txId: data.txId,
@@ -17,24 +19,31 @@ const addTransaction = async data => {
     console.log("Transaction Storing Failed");
     console.log(err);
   }
-};
+});
 
 const verifyTransaction = asyncHandler(async (req, res, next) => {
   const txId = req.body.txId;
-  const transactionData = await WalletTransaction.findOne({ txId });
-  if (!transactionData)
-    return next(new ErrorResponse("Invalid Transaction ID", 404));
-  if (
-    transactionData.status === "Success" ||
-    transactionData.status === "Pending"
-  )
-    return next(
-      new ErrorResponse(
-        "Succeeded and Pending Transaction cannot be repeated",
-        403
-      )
-    );
-  req.body = Object.assign(transactionData);
+  const transactionReceipt = await web3.eth.getTransactionReceipt(txId);
+  if(!transactionReceipt?.status) 
+    return next(new ErrorResponse("Transaction Failed",401));
+  if(transactionReceipt?.from.toLowerCase() !== req.user.toLowerCase()) 
+    return next(new ErrorResponse("Transaction is not originated from your account",401));
+  if(transactionReceipt?.to.toLowerCase() !== "0xdCFF746b4EBa3446c2ec3794A0961785c7c93013".toLowerCase()) 
+    return next(new ErrorResponse("Transaction is not received to our account",401));
+  const transaction = await web3.eth.getTransaction(txId);
+  const updatedValue = await web3.utils.fromWei(transaction.value, "ether");
+  await User.findOneAndUpdate(
+    {
+      _id:req.userId
+    },
+    { $inc: { walletBalance: +updatedValue } }
+  );
+  res.status(200).json({
+    success: true,
+    data: {
+      message: "Balance Successfully Added"
+    }
+  });
 });
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
