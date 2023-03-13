@@ -16,9 +16,9 @@ const sendErrorMail = async (data) => {
     try{
         let sendResult = await transporter.sendMail({
             from : 'Drunken Bytes <bytes.drunken@hotmail.com>',
-            to  : `${data.buyerEmail}`,
+            to  : `${data.receiverEmail}`,
             subject : 'NFT Warranty Card generation failed',
-            text : `Hello ${data.buyerName}, Congratulations on your sale of ${data.brandName} ${data.productName} with id ${data.productId} to 
+            text : `Hello ${data.receiverName}, Congratulations on your sale of ${data.brandName} ${data.productName} with id ${data.productId} to 
                     ${data.buyerName}.This NFT will automatically be burned after ${data.expireDate}. Regards,The Drunken Bytes Team`,
             html :`Hello <b>${data.buyerName},</b>
                   <p>Congratulations on your sale of <b>${data.brandName} ${data.productName}</b> with product id <b>${data.productId}</b> to 
@@ -36,7 +36,7 @@ const sendConfirmationMail = async (data) => {
     try{
         let sendResult = await transporter.sendMail({
             from : 'Drunken Bytes <bytes.drunken@hotmail.com>',
-            to  : `${data.buyerEmail}`,
+            to  : `${data.receiverEmail}`,
             subject : 'Congratulations on receiving NFT Warranty Card',
             text : `Hello ${data.buyerName}, Congratulations on your purchase of ${data.brandName} ${data.productName} with product id ${data.productId} from 
                     ${data.sellerName}. You have also received the Warranty Card NFT with id ${data.tokenId} with your purchase.
@@ -70,7 +70,7 @@ const sendPendingMail = async (data) => {
   try{
       let sendResult = await transporter.sendMail({
           from : 'Drunken Bytes <bytes.drunken@hotmail.com>',
-          to  : `${data.buyerEmail}`,
+          to  : `${data.receiverEmail}`,
           subject : 'Congratulations on receiving NFT Warranty Card',
           text : `Hello ${data.buyerName}, Congratulations on your purchase of ${data.brandName} ${data.productName} with product id ${data.productId} from 
                   ${data.sellerName}. You have also received the Warranty Card NFT with id ${data.tokenId} with your purchase.

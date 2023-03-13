@@ -34,7 +34,7 @@ const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
     const contract = await new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
     const networkId = await web3.eth.net.getId();
     let tx = await contract.methods.safeMint(
-        dataToStore.buyerMetamaskAddress,
+        dataToStore.receiverWalletAddress,
         dataToStore.tokenId,
         storedDataLink
       );
@@ -129,18 +129,20 @@ const storeTransactionDataAndDecreaseUserBalance = async (req, data) => {
     const transactionData = {
       txId: data.txId,
       createdBy: data.createdBy,
-      buyerName: data.buyerName,
-      buyerEmail: data.buyerEmail,
-      brandName: data.brandName,
-      productName: data.productName,
-      productId: data.productId,
       tokenId: data.tokenId,
-      warrantyExpireDate: data.warrantyExpireDate,
       status: data.status,
-      buyerMetamaskAddress: data.buyerMetamaskAddress,
       dateCreated: data.dateCreated,
       value: data.value,
-      methodType: data.methodType
+      receiverName: data.receiverName,
+      receiverEmail: data.receiverEmail,
+      receiverWalletAddress: req.body.receiverWalletAddress,
+      nftType: req.body.nftType,
+      nftName: req.body.nftName,
+      useCustomImage: req.body.useCustomImage,
+      isTransferable: req.body.isTransferable,
+      isBurnable: req.body.isBurnable,
+      burnAfter: req.body.burnAfter,
+      traits: req.body.traits,
     };
     await new NftTransaction(transactionData).save();
     if (data.status !== "Failed") {
@@ -162,6 +164,9 @@ const storeTransactionDataAndDecreaseUserBalance = async (req, data) => {
 
 const processNFT = async (req, res, next) => {
   //Verifying the limit or authenticity
+  if(req.body.useCustomImage && (req.body.imageBase64 === undefined || req.body.imageBase64 === null)){
+    return next(new ErrorResponse("Image Base 64 Not Available", 403));
+  }
   const { user, status } = await verifyUser(req, next);
   if (status) {
     const session = await mongoose.startSession()
@@ -181,15 +186,17 @@ const processNFT = async (req, res, next) => {
     const dataToStore = {
       sellerEmail: user.email,
       sellerName: user.name,
-      buyerName: req.body.buyerName,
-      buyerEmail: req.body.buyerEmail,
-      brandName: req.body.brandName,
-      productName: req.body.productName,
-      productId: req.body.productId,
-      warrantyExpireDate: req.body.warrantyExpireDate,
-      buyerMetamaskAddress: req.body.buyerMetamaskAddress,
-      accountAddress: req.userMetamask,
-      methodType: req.body.methodType,
+      receiverName: req.body.receiverName,
+      receiverEmail: req.body.receiverEmail,
+      receiverWalletAddress: req.body.receiverWalletAddress,
+      nftType: req.body.nftType,
+      nftName: req.body.nftName,
+      useCustomImage: req.body.useCustomImage,
+      imageBase64: req.body.imageBase64,
+      isTransferable: req.body.isTransferable,
+      isBurnable: req.body.isBurnable,
+      burnAfter: req.body.burnAfter,
+      traits: req.body.traits,
       tokenId
     };
     //Generating and Signing Web3 Transaction

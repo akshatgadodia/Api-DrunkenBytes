@@ -9,18 +9,21 @@ const nftTransactionSchema = new Schema({
     required: [true, "Transaction ID is required"]
   },
   createdBy: { type: Schema.Types.ObjectId, ref: "user" },
-  buyerName: String,
-  buyerEmail: String,
-  brandName: String,
-  productName: String,
-  productId: String,
+  receiverName: String,
+  receiverEmail: String,
+  receiverWalletAddress: String,
+  nftType: String,
+  nftName: String,
+  useCustomImage: {type: Boolean, default: false},
+  isTransferable: {type: Boolean, default: true},
+  isBurnable: {type: Boolean, default: false},
+  burnAfter: Date,
+  traits: [{key: String, value: String}],
   tokenId: Number,
-  warrantyExpireDate: Date,
   status: String,
-  buyerMetamaskAddress: String,
   dateCreated: Date,
   value: Number,
-  methodType: Number
+
 });
 
 module.exports = new mongoose.model("nft-transaction", nftTransactionSchema);
