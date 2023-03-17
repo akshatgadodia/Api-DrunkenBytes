@@ -20,6 +20,9 @@ const port = process.env.PORT || 5000;
 app.use("/v1/public/images", express.static(path.join(__dirname,"/public/images")))
 app.use("/v1/logs", express.static(path.join(__dirname,"/logs")))
 
+//
+app.use(express.json({limit: '50mb'}))
+
 // Middlewares
 // Log Requests
 app.use((req, res, next) => {
