@@ -4,7 +4,12 @@ const ErrorResponse = require("../utils/errorResponse");
 const Product = require("../models/Product");
 
 const saveProduct = asyncHandler(async (req, res, next) => {
-  await new Product(req.body).save();
+  await new Product({
+    createdBy: req.userId,
+    traits: req.body.traits,
+    nftType: req.body.nftType,
+    name: req.body.name
+  }).save();
   res.status(200).json({
     success: true,
     data: {
@@ -18,7 +23,7 @@ const getProducts = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {
-      articles: products
+      products: products
     }
   });
 });

@@ -1,0 +1,28 @@
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:36.751Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:36.985Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:37.080Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.117Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.142Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.253Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.539Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.555Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.582Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.632Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.641Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.648Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:31.790Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-03-20T03:30:18.964Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-03-20T03:30:19.505Z"}
+{"level":"error","message":"WalletTransaction.save is not a function","timestamp":"2023-03-20T03:42:55.493Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:46:43.513Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:46:43.587Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:47:41.604Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:47:41.687Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:48:53.107Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:48:53.249Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T17:57:31.516Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T18:00:23.634Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T18:00:35.320Z"}
+{"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:38:13.586Z"}
+{"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:39:45.213Z"}
+{"level":"error","message":"expiryDate is not defined","timestamp":"2023-03-24T18:41:45.233Z"}
