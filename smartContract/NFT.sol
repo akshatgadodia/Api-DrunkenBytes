@@ -10,7 +10,7 @@ import "./ERC721Metadata.sol";
 import "./ERC721Receiver.sol";
 import "./Strings.sol";
 
-contract NFT is ERC165, ERC721, ERC721Metadata{
+abstract contract NFT is ERC165, ERC721, ERC721Metadata{
     using Strings for uint256;
 
     // Token name
@@ -97,38 +97,11 @@ contract NFT is ERC165, ERC721, ERC721Metadata{
         _setApprovalForAll(msg.sender, operator, approved);
     }
 
-
     /**
      * @dev See {IERC721-isApprovedForAll}.
      */
     function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[owner][operator];
-    }
-
-     /**
-     * @dev See {IERC721-transferFrom}.
-     */
-    function transferFrom(address from ,address to ,uint256 tokenId) public virtual override {
-        //solhint-disable-next-line max-line-length
-        //require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner nor approved");
-        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: caller is not token owner nor approved");
-        _transfer(from, to, tokenId);
-    }
-
-    /**
-     * @dev See {IERC721-safeTransferFrom}.
-     */
-    function safeTransferFrom(address from,address to,uint256 tokenId) public virtual override {
-        safeTransferFrom(from, to, tokenId, "");
-    }
-
-    /**
-     * @dev See {IERC721-safeTransferFrom}.
-     */
-    function safeTransferFrom(address from,address to,uint256 tokenId,bytes memory data) public virtual override {
-        //require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner nor approved");
-        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: caller is not token owner nor approved");
-        _safeTransfer(from, to, tokenId, data);
     }
 
     /**
@@ -227,6 +200,15 @@ contract NFT is ERC165, ERC721, ERC721Metadata{
         _afterTokenTransfer(address(0), to, tokenId);
     }
 
+/**
+     * The approval is cleared when the token is burned.
+     * Requirements:
+     * - `tokenId` must exist.
+     */
+    function _clearApproval(uint256 tokenId) internal virtual {
+        delete _tokenApprovals[tokenId];
+    }
+
     /**
      * @dev Destroys `tokenId`.
      * The approval is cleared when the token is burned.
@@ -240,13 +222,13 @@ contract NFT is ERC165, ERC721, ERC721Metadata{
     function _burn(uint256 tokenId) internal virtual {
         address owner = _owners[tokenId];
         _beforeTokenTransfer(owner, address(0), tokenId);
-        // Clear approvals
-        delete _tokenApprovals[tokenId];
+        _clearApproval(tokenId);
         _balances[owner] -= 1;
         delete _owners[tokenId];
         emit Transfer(owner, address(0), tokenId);
         _afterTokenTransfer(owner, address(0), tokenId);
     }
+
 
      /**
      * @dev Transfers `tokenId` from `from` to `to`.

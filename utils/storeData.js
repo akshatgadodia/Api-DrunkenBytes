@@ -21,7 +21,7 @@ const saveDataOnIPFS = async values => {
     const NFTData = {
       description: "A warranty card NFT is a unique digital asset that represents a warranty for a physical product or service. It is created and stored on a blockchain network, which ensures its authenticity and traceability. The owner of the warranty card NFT can use it to claim their warranty in case of any defects or issues with the product. The NFT can also be traded or sold on various NFT marketplaces, providing a new level of flexibility and liquidity to the traditional warranty process. Overall, the warranty card NFT is a revolutionary concept that combines the benefits of blockchain technology with traditional warranties, providing an enhanced user experience for both buyers and sellers.",
       image: values.useCustomImage ? values.imageBase64 : "ipfs://QmWvHbUYRZEUr4hx617nBiCsH2zrAGMBbLxJZEUpzwa6hh",
-      external_url: `https://claims.drunkenbytes.vercel.app/${values.tokenId}`, 
+      external_url: `https://drunkenbytes.vercel.app/raise-issue/${values.tokenId}`, 
       name: values.nftName,
       attributes
     };

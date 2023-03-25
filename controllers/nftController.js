@@ -36,6 +36,7 @@ const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
     let tx = await contract.methods.safeMint(
         dataToStore.receiverWalletAddress,
         dataToStore.tokenId,
+        dataToStore.isTransferable,
         storedDataLink
       );
     const data = tx.encodeABI();
@@ -103,7 +104,7 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
       ...dataToStore,
       txId: receipt.transactionHash
     });
-    const value = transactionReceipt.effectiveGasPrice * transactionReceipt.gasUsed;
+    const value = transactionReceipt?.effectiveGasPrice * transactionReceipt?.gasUsed;
     const transactionCost = await web3.utils.fromWei(value.toString(), "ether");
     return { result: "Success", value: transactionCost };
   } catch (err) {
@@ -114,7 +115,7 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
       console.log("TRANSACTION PENDING ON BLOCKCHAIN");
       console.log(err);
       await sendPendingMail({ ...dataToStore, txId: signedTx.transactionHash });
-      return { result: "Pending", value: NaN };
+      return { result: "Pending", value: 0 };
     } else {
       console.log("NFT CREATION FAILED");
       console.log(err);
