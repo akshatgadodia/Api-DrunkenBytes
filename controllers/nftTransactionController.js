@@ -155,7 +155,20 @@ const getTransaction = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getTransactionByTokenId = asyncHandler(async (req, res, next) => {
+  const tokenId = req.query.tokenId;
+  const transaction = await NftTransaction.findOne({ tokenId });
+
+  res.status(200).json({
+    success: true,
+    data: {
+      transaction
+    }
+  });
+});
+
 module.exports = {
+  getTransactionByTokenId,
   addTransaction,
   repeatTransaction,
   getTransactions,

@@ -18,16 +18,75 @@ const saveProduct = asyncHandler(async (req, res, next) => {
   });
 });
 
-const getProducts = asyncHandler(async (req, res, next) => {
-  const products = await Product.find({createdBy: req.userId})
+const getTemplates = asyncHandler(async (req, res, next) => {
+  const createdBy = req.userId;
+  const { q, page, size } = req.query;
+  let searchParameters = [];
+  if (q !== "{}" && q !== "") {
+    const queryParameters = q.split(",");
+    queryParameters.forEach(element => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      if (key === "tokenId") searchParameters.push({ [key]: value });
+      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
+    });
+  }
+  searchParameters.push({
+    createdBy: createdBy
+  });
+  const templates = await Product.find({ $and: searchParameters })
+    .skip((page - 1) * size)
+    .limit(size);
+  const totalTemplates = await Product.countDocuments({
+    $and: searchParameters
+  });
   res.status(200).json({
     success: true,
     data: {
-      products: products
+      templates,
+      totalTemplates
     }
   });
 });
 
+const getTemplateById = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+  const template = await Product.findOne({_id: id})
+  if(!template) return next(new ErrorResponse("Template Not Found", 404));
+  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
+  res.status(201).json({
+    success: true,
+    data: {template}
+  });
+});
 
+const updateTemplateById = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+  const template = await Product.findOne({_id: id})
+  if(!template) return next(new ErrorResponse("Template Not Found", 404));
+  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
+  await Product.findByIdAndUpdate(id, req.body, {
+    new: true, // Return the modified record instead of the original
+  });
+  res.status(201).json({
+    success: true,
+    data: {message : "Template Updated Successfully"}
+  });
+});
 
-module.exports = { saveProduct, getProducts };
+const deleteTemplate = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const template = await Product.findOne({_id: id})
+  if(!template) return next(new ErrorResponse("Template Not Found", 404));
+  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
+  await Product.deleteOne({_id: id});
+  res.status(201).json({
+    success: true,
+    data: {message : "Template Deleted Successfully"}
+  });
+});
+
+module.exports = { saveProduct, getTemplates, deleteTemplate, getTemplateById, updateTemplateById };

@@ -26,3 +26,21 @@
 {"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:38:13.586Z"}
 {"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:39:45.213Z"}
 {"level":"error","message":"expiryDate is not defined","timestamp":"2023-03-24T18:41:45.233Z"}
+{"level":"error","message":"Template Not Found","timestamp":"2023-03-26T08:20:02.576Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:33:51.607Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:33:59.425Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:06.889Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:31.123Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:51.417Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:49.097Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:55.265Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:59.420Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:59:01.096Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:01:32.734Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:01:46.830Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:02:08.253Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:03:01.101Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:04:27.610Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T17:50:26.304Z"}
+{"level":"error","message":"ApiKey is not defined","timestamp":"2023-03-26T19:13:34.859Z"}
+{"level":"error","message":"Issue Already Raised for this Token ID","timestamp":"2023-03-26T19:16:22.526Z"}
