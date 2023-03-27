@@ -20,7 +20,8 @@ const addTransaction = async data => {
       buyerMetamaskAddress: data.buyerMetamaskAddress,
       dateCreated: data.dateCreated,
       value: data.value,
-      methodType: data.methodType
+      methodType: data.methodType,
+      commissionCharged: data.commissionCharged
     };
     await new NftTransaction(transactionData).save();
   } catch (err) {

@@ -64,7 +64,7 @@ const getAllIssues = asyncHandler(async (req, res, next) => {
     });
   }
   searchParameters.push({
-    createdBy: createdBy
+    issueFor: createdBy
   });
   const issues = await Issue.find({ $and: searchParameters })
     .skip((page - 1) * size)

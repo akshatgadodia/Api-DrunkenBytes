@@ -3,6 +3,11 @@ const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 var jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const ApiKey = require("../models/ApiKey");
+const NftTransaction = require("../models/NftTransaction");
+const Issue = require("../models/Issue");
+const Product = require("../models/Product");
+
 const { v4: uuidv4 } = require('uuid');
 const { web3 } = require("../config/web3");
 
@@ -109,10 +114,27 @@ const getUser = asyncHandler(async (req, res, next) => {
 
 const getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ _id: req.userId });
+  const apiKey = await ApiKey.countDocuments({createdBy: req.userId});
+  const nft = await NftTransaction.countDocuments({createdBy: req.userId});
+  const pendingTransactions = await NftTransaction.countDocuments({createdBy: req.userId, status: "pending"});
+  const totalIssues = await Issue.countDocuments({issueFor: req.userId});
+  const solvedIssues = await Issue.countDocuments({issueFor: req.userId, isSolved: true});
+  const templates = await Product.countDocuments({createdBy: req.userId});
+  const result = await NftTransaction.find({createdBy: req.userId}).sort({dateCreated: -1});
+  const value = result.reduce((accumulator, transaction) => accumulator + transaction.value, 0);
   res.status(200).json({
     success: true,
     data: {
-      user
+      user,
+      pendingTransactions,
+      apiKey,
+      totalIssues,
+      solvedIssues,
+      activeIssues: totalIssues-solvedIssues,
+      lastTransactionValue: result[0]?.value,
+      nft,
+      templates,
+      value
     }
   });
 });

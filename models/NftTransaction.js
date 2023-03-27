@@ -23,6 +23,7 @@ const nftTransactionSchema = new Schema({
   status: String,
   dateCreated: Date,
   value: Number,
+  commissionCharged: { type: Number },
 
 });
 
