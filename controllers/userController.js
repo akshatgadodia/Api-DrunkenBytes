@@ -68,7 +68,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     process.env.D_B_SECRET_KEY,
     { expiresIn: "7d" }
   );
-  res.cookie("userAccessToken", accessToken, {
+  res.cookie("db_userAccessToken", accessToken, {
     // expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
     secure: true, // set to true if your using https or samesite is none
     sameSite: 'none', // set to none for cross-request

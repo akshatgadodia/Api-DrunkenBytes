@@ -59,3 +59,11 @@
 {"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:45:59.925Z"}
 {"level":"error","message":"Cannot read properties of undefined (reading 'totalAmount')","timestamp":"2023-03-27T14:50:14.845Z"}
 {"level":"error","message":"NftTransaction.find(...).sum is not a function","timestamp":"2023-03-27T15:03:17.356Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:25:58.720Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:26:58.807Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:27:24.181Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:29:08.969Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:31:47.599Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:34:36.265Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:49.426Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:55.293Z"}

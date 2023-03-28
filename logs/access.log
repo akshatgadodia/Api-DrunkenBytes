@@ -2394,3 +2394,93 @@
 {"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-27T17:02:35.628Z"}
 {"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-27T18:14:12.015Z"}
 {"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-27T18:24:42.841Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T05:23:05.870Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T05:25:24.888Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T05:25:55.871Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T05:25:56.289Z"}
+{"level":"info","message":"OPTIONS /v1/user/login","timestamp":"2023-03-28T05:26:03.574Z"}
+{"level":"info","message":"POST /v1/user/login","timestamp":"2023-03-28T05:26:03.580Z"}
+{"level":"info","message":"OPTIONS /v1/user/logout","timestamp":"2023-03-28T05:52:05.630Z"}
+{"level":"info","message":"POST /v1/user/logout","timestamp":"2023-03-28T05:52:05.636Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T05:52:10.602Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T05:52:10.608Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T05:55:19.094Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T05:55:19.115Z"}
+{"level":"info","message":"OPTIONS /v1/user/logout","timestamp":"2023-03-28T05:55:40.135Z"}
+{"level":"info","message":"POST /v1/user/logout","timestamp":"2023-03-28T05:55:40.141Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T06:00:03.932Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T06:00:03.948Z"}
+{"level":"info","message":"OPTIONS /v1/user/login","timestamp":"2023-03-28T06:01:06.843Z"}
+{"level":"info","message":"POST /v1/user/login","timestamp":"2023-03-28T06:01:06.849Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T06:01:50.455Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T06:02:08.849Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T06:02:41.812Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T06:04:18.732Z"}
+{"level":"info","message":"GET /v1/nft/get-nft-generation-cost","timestamp":"2023-03-28T06:06:00.354Z"}
+{"level":"info","message":"GET /v1/nft/get-nft-generation-cost","timestamp":"2023-03-28T06:06:06.333Z"}
+{"level":"info","message":"GET /v1/nft/get-nft-generation-cost","timestamp":"2023-03-28T06:16:28.428Z"}
+{"level":"info","message":"OPTIONS /v1/user/logout","timestamp":"2023-03-28T06:52:44.682Z"}
+{"level":"info","message":"POST /v1/user/logout","timestamp":"2023-03-28T06:52:44.958Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T07:25:10.208Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T07:25:10.327Z"}
+{"level":"info","message":"OPTIONS /v1/user/login","timestamp":"2023-03-28T07:25:35.466Z"}
+{"level":"info","message":"POST /v1/user/login","timestamp":"2023-03-28T07:25:35.499Z"}
+{"level":"info","message":"OPTIONS /v1/product/","timestamp":"2023-03-28T07:25:57.844Z"}
+{"level":"info","message":"GET /v1/product/","timestamp":"2023-03-28T07:25:57.863Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:25:58.720Z"}
+{"level":"info","message":"OPTIONS /v1/product/","timestamp":"2023-03-28T07:26:57.790Z"}
+{"level":"info","message":"GET /v1/product/","timestamp":"2023-03-28T07:26:57.794Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:26:58.807Z"}
+{"level":"info","message":"OPTIONS /v1/product/","timestamp":"2023-03-28T07:27:23.753Z"}
+{"level":"info","message":"GET /v1/product/","timestamp":"2023-03-28T07:27:23.758Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:27:24.181Z"}
+{"level":"info","message":"OPTIONS /v1/product/","timestamp":"2023-03-28T07:29:08.956Z"}
+{"level":"info","message":"GET /v1/product/","timestamp":"2023-03-28T07:29:08.961Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:29:08.969Z"}
+{"level":"info","message":"GET /v1/nft/get-nft-generation-cost","timestamp":"2023-03-28T07:31:14.688Z"}
+{"level":"info","message":"OPTIONS /v1/product","timestamp":"2023-03-28T07:31:45.853Z"}
+{"level":"info","message":"GET /v1/product","timestamp":"2023-03-28T07:31:46.931Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:31:47.599Z"}
+{"level":"info","message":"OPTIONS /v1/user/logout","timestamp":"2023-03-28T07:33:45.139Z"}
+{"level":"info","message":"POST /v1/user/logout","timestamp":"2023-03-28T07:33:45.706Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T07:33:55.880Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T07:33:55.906Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-03-28T07:33:58.363Z"}
+{"level":"info","message":"OPTIONS /v1/user/initial-login","timestamp":"2023-03-28T07:34:06.601Z"}
+{"level":"info","message":"POST /v1/user/initial-login","timestamp":"2023-03-28T07:34:06.609Z"}
+{"level":"info","message":"OPTIONS /v1/user/login","timestamp":"2023-03-28T07:34:28.425Z"}
+{"level":"info","message":"POST /v1/user/login","timestamp":"2023-03-28T07:34:28.434Z"}
+{"level":"info","message":"POST /v1/user/login","timestamp":"2023-03-28T07:34:29.621Z"}
+{"level":"info","message":"OPTIONS /v1/product","timestamp":"2023-03-28T07:34:35.600Z"}
+{"level":"info","message":"GET /v1/product","timestamp":"2023-03-28T07:34:36.186Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:34:36.265Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:38:49.205Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:38:49.353Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:49.426Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:38:55.255Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:38:55.260Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:55.293Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:39:49.152Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:39:49.166Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:40:09.092Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:40:09.116Z"}
+{"level":"info","message":"OPTIONS /v1/nft/mint-nft","timestamp":"2023-03-28T07:41:12.631Z"}
+{"level":"info","message":"POST /v1/nft/mint-nft","timestamp":"2023-03-28T07:41:12.763Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:43:27.160Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:43:27.168Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:44:40.184Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:44:40.189Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:46:07.303Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:46:07.309Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:47:41.005Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:47:41.011Z"}
+{"level":"info","message":"OPTIONS /v1/product/get-all-templates","timestamp":"2023-03-28T07:48:06.463Z"}
+{"level":"info","message":"GET /v1/product/get-all-templates","timestamp":"2023-03-28T07:48:06.470Z"}
+{"level":"info","message":"OPTIONS /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:56:55.257Z"}
+{"level":"info","message":"OPTIONS /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:56:55.264Z"}
+{"level":"info","message":"GET /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:56:55.339Z"}
+{"level":"info","message":"GET /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:56:56.485Z"}
+{"level":"info","message":"OPTIONS /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:59:43.740Z"}
+{"level":"info","message":"OPTIONS /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:59:43.819Z"}
+{"level":"info","message":"GET /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:59:43.851Z"}
+{"level":"info","message":"GET /v1/product?q=&page=1&size=10","timestamp":"2023-03-28T07:59:44.841Z"}

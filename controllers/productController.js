@@ -50,9 +50,19 @@ const getTemplates = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getAllTemplates = asyncHandler(async (req, res, next) => {
+  const createdBy = req.userId;
+  const templates = await Product.find({ createdBy: createdBy});
+  res.status(200).json({
+    success: true,
+    data: {
+      templates
+    }
+  });
+});
+
 const getTemplateById = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
   const template = await Product.findOne({_id: id})
   if(!template) return next(new ErrorResponse("Template Not Found", 404));
   if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
@@ -63,8 +73,7 @@ const getTemplateById = asyncHandler(async (req, res, next) => {
 });
 
 const updateTemplateById = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
-  console.log(id);
+  const id = req.params.id
   const template = await Product.findOne({_id: id})
   if(!template) return next(new ErrorResponse("Template Not Found", 404));
   if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
@@ -89,4 +98,4 @@ const deleteTemplate = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { saveProduct, getTemplates, deleteTemplate, getTemplateById, updateTemplateById };
+module.exports = { saveProduct, getTemplates, deleteTemplate, getTemplateById, updateTemplateById, getAllTemplates };
