@@ -8,3 +8,5 @@
 {"level":"error","message":"Transaction is not received to our account","timestamp":"2023-03-08T08:27:54.270Z"}
 {"level":"error","message":"Cannot Delete Image","timestamp":"2023-03-14T16:07:31.216Z"}
 {"level":"error","message":"request entity too large","timestamp":"2023-03-14T16:37:22.600Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-15T02:51:48.316Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-15T02:51:48.330Z"}
