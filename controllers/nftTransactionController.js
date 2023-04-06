@@ -50,7 +50,7 @@ const repeatTransaction = asyncHandler(async (req, res, next) => {
 });
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
-  const { q, createdBy, page, size } = req.query;
+  const { q, page, size, sort } = req.query;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");
@@ -59,6 +59,16 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
       if (key === "tokenId") searchParameters.push({ [key]: value });
+      else if(key === "useCustomImage") searchParameters.push({ [key]: value });
+      else if(key === "isTransferable") searchParameters.push({ [key]: value });
+      else if(key === "isBurnable") searchParameters.push({ [key]: value });
+      else if(key === "dateCreated") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`,
+        $lt: `${value}T23:59:59.999Z`
+      } });
+      else if(key === "burnAfter") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`
+      } });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
@@ -82,7 +92,7 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
 
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
-  const { q, page, size } = req.query;
+  const { q, page, size, sort } = req.query;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");
@@ -91,6 +101,16 @@ const getTransactions = asyncHandler(async (req, res, next) => {
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
       if (key === "tokenId") searchParameters.push({ [key]: value });
+      else if(key === "useCustomImage") searchParameters.push({ [key]: value });
+      else if(key === "isTransferable") searchParameters.push({ [key]: value });
+      else if(key === "isBurnable") searchParameters.push({ [key]: value });
+      else if(key === "dateCreated") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`,
+        $lt: `${value}T23:59:59.999Z`
+      } });
+      else if(key === "burnAfter") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`
+      } });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
@@ -113,7 +133,7 @@ const getTransactions = asyncHandler(async (req, res, next) => {
 });
 
 const getAllTransactions = asyncHandler(async (req, res, next) => {
-  const { q, page, size } = req.query;
+  const { q, page, size, sort } = req.query;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");
@@ -122,6 +142,16 @@ const getAllTransactions = asyncHandler(async (req, res, next) => {
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
       if (key === "tokenId") searchParameters.push({ [key]: value });
+      else if(key === "useCustomImage") searchParameters.push({ [key]: value });
+      else if(key === "isTransferable") searchParameters.push({ [key]: value });
+      else if(key === "isBurnable") searchParameters.push({ [key]: value });
+      else if(key === "dateCreated") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`,
+        $lt: `${value}T23:59:59.999Z`
+      } });
+      else if(key === "burnAfter") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`
+      } });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
@@ -159,7 +189,6 @@ const getTransaction = asyncHandler(async (req, res, next) => {
 const getTransactionByTokenId = asyncHandler(async (req, res, next) => {
   const tokenId = req.query.tokenId;
   const transaction = await NftTransaction.findOne({ tokenId });
-
   res.status(200).json({
     success: true,
     data: {

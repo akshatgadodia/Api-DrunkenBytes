@@ -10,7 +10,6 @@ router.get("/get-transaction", getTransaction);
 router.get("/get-transaction-details", getTransactionByTokenId);
 router.get("/get-all-transactions", getAllTransactions);
 router.get("/get-user-transactions", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SUPPORT), getTransactionsByUserID);
-router.post("/repeat-transaction", repeatTransaction);
-// router.post("/repeat-transaction", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SUPPORT), repeatTransaction);
+router.post("/repeat-transaction", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SUPPORT), repeatTransaction);
 
 module.exports = router;
