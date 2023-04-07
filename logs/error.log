@@ -77,3 +77,17 @@
 {"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:47.185Z"}
 {"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:58.006Z"}
 {"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:58.167Z"}
+{"level":"error","message":"Image Base 64 Not Available","timestamp":"2023-04-07T12:31:09.389Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:00:41.338Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:01:45.781Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:02:07.746Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:12:40.721Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:12:48.257Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:13:11.503Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:13:18.312Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:13:49.304Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:13:56.080Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:14:52.086Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:27:49.365Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:18.229Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:25.507Z"}

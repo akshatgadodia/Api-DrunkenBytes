@@ -50,7 +50,8 @@ const repeatTransaction = asyncHandler(async (req, res, next) => {
 });
 
 const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
-  const { q, page, size, sort } = req.query;
+  const { q, page, size } = req.query;
+  const id = req.params.id;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");
@@ -73,7 +74,7 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
     });
   }
   searchParameters.push({
-    createdBy: createdBy
+    createdBy: id
   });
   const transactions = await NftTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
@@ -92,7 +93,7 @@ const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
 
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
-  const { q, page, size, sort } = req.query;
+  const { q, page, size } = req.query;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");
@@ -133,7 +134,7 @@ const getTransactions = asyncHandler(async (req, res, next) => {
 });
 
 const getAllTransactions = asyncHandler(async (req, res, next) => {
-  const { q, page, size, sort } = req.query;
+  const { q, page, size } = req.query;
   let searchParameters = [];
   if (q !== "{}" && q !== "") {
     const queryParameters = q.split(",");

@@ -100,10 +100,20 @@ const updateUserData = asyncHandler(async (req, res, next) => {
   });
 });
 
+const verifyUser = asyncHandler(async (req, res, next) => {
+  await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { verified: true, verifiedBy: req.userId}
+  );
+  res.status(200).json({
+    success: true,
+    data: { message: "User Verified Successfully" }
+  });
+});
 
 const getUser = asyncHandler(async (req, res, next) => {
   const userId = req.query.userId;
-  const user = await User.findOne({ _id: userId });
+  const user = await User.findOne({ _id: userId }).populate({ path: "verifiedBy", select: ["name", "_id"] });;
   res.status(200).json({
     success: true,
     data: {
@@ -153,7 +163,7 @@ const getAllUsers = asyncHandler(async (req, res, next) => {
   }
   const users = await User.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size)
+    .limit(size).populate({ path: "verifiedBy", select: ["name", "_id"] });
   const totalUsers = await User.countDocuments({ $and: searchParameters });
   res.status(200).json({
     success: true,
@@ -181,4 +191,4 @@ const saveUserRegisterRequest = asyncHandler(async (req, res, next) => {
     }
   });
 });
-module.exports = { loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser, saveUserRegisterRequest, getUserProfile };
+module.exports = { verifyUser, loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser, saveUserRegisterRequest, getUserProfile };
