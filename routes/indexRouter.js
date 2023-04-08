@@ -23,8 +23,8 @@ router.use("/v1/api-key", apiKeyRoutes);
 const adminDashboardRoute = require("./adminDashboardRoute");
 router.use("/v1/admin-dashboard", adminDashboardRoute);
 //Message Router
-const messageRoute = require("./messageRoute");
-router.use("/v1/message", messageRoute);
+const ticketRoute = require("./ticketRoute");
+router.use("/v1/ticket", ticketRoute);
 
 const articleRoute = require("./articleRoute");
 router.use("/v1/article", articleRoute);
@@ -35,8 +35,8 @@ router.use("/v1/image", imageRoute);
 const blogRoute = require("./blogRoute");
 router.use("/v1/blog", blogRoute);
 
-const productRoute = require("./productRoute");
-router.use("/v1/product", productRoute);
+const templateRoute = require("./templateRoute");
+router.use("/v1/template", templateRoute);
 
 const downloadRoute = require("./downloadRoute");
 router.use("/v1/download", downloadRoute);

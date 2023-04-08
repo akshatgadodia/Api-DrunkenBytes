@@ -16,14 +16,17 @@ const registerSupportUser = asyncHandler(async (req, res, next) => {
   let roles;
   if (type === "EDITOR") {
     roles = {
-      USER: 6541,
       EDITOR: 3894
     };
   }
   if (type === "SUPPORT") {
     roles = {
-      USER: 6541,
       SUPPORT: 7489
+    };
+  }
+  if (type === "SALES") {
+    roles = {
+      SALES: 8458,
     };
   }
   const data = {
@@ -69,20 +72,18 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
     else if(roles.includes(7489)){
       role = "SUPPORT"
     }
+    else if(roles.includes(8458)){
+      role = "SALES"
+    }
     else{
       role = "USER"
     }
-    res.cookie("supportUserAccessToken", accessToken, {
+    res.cookie("db_s_userAccessToken", accessToken, {
       expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
       secure: true, // set to true if your using https or samesite is none
       sameSite: 'none', // set to none for cross-request
       httpOnly: true
     });
-    // res.cookie("supportUserRole", role, {
-    //   expires: new Date(Date.now() + ( 7 * 24 * 60 * 60 * 1000)),
-    //   secure: true, // set to true if your using https or samesite is none
-    //   sameSite: 'none', // set to none for cross-request
-    // });
     res.status(200).json({
       success: true,
       data: { message: "Successfully Logged In", role }
@@ -93,8 +94,7 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
 });
 
 const logoutSupportUser = asyncHandler(async (req, res, next) => {
-  res.clearCookie('supportUserAccessToken');
-  // res.clearCookie('supportUserRole');
+  res.clearCookie('db_s_userAccessToken');
   res.status(200).json({
     success: true,
     data: { message: "Successfully Logged Out" }

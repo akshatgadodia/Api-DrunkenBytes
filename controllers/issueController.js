@@ -49,17 +49,23 @@ const getIssue = asyncHandler(async (req, res, next) => {
   });
 });
 
-const getAllIssues = asyncHandler(async (req, res, next) => {
+const getIssues = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
-  const { q, page, size } = req.query;
+  const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (q !== "{}" && q !== "") {
-    const queryParameters = q.split(",");
-    queryParameters.forEach(element => {
+  if (filters !== "{}" && filters !== "") {
+    const queryParameters = filters.split(",");
+    queryParameters.forEach((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
-      if (key === "tokenId") searchParameters.push({ [key]: value });
+      if(key === "issueFor") searchParameters.push({ [key]: value });
+      else if (key === "tokenId") searchParameters.push({ [key]: value });
+      else if (key === "isSolved") searchParameters.push({ [key]: value });
+      else if(key === "dateCreated") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`,
+        $lt: `${value}T23:59:59.999Z`
+      } });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
@@ -68,7 +74,7 @@ const getAllIssues = asyncHandler(async (req, res, next) => {
   });
   const issues = await Issue.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size);
+    .limit(size).sort(JSON.parse(sort));
   const totalIssues = await Issue.countDocuments({
     $and: searchParameters
   });
@@ -81,4 +87,38 @@ const getAllIssues = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { saveIssue, getIssue, getAllIssues, solveIssue };
+const getAllIssues = asyncHandler(async (req, res, next) => {
+  const { filters, page, size, sort } = req.query;
+  let searchParameters = [];
+  if (filters !== "{}" && filters !== "") {
+    const queryParameters = filters.split(",");
+    queryParameters.forEach((element) => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      if(key === "issueFor") searchParameters.push({ [key]: value });
+      else if (key === "tokenId") searchParameters.push({ [key]: value });
+      else if (key === "isSolved") searchParameters.push({ [key]: value });
+      else if(key === "dateCreated") searchParameters.push({ [key]: {
+        $gte: `${value}T00:00:00.000Z`,
+        $lt: `${value}T23:59:59.999Z`
+      } });
+      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
+    });
+  }
+  const issues = await Issue.find({ $and: searchParameters })
+    .skip((page - 1) * size)
+    .limit(size).populate({ path: "issueFor", select: ["name", "_id"] }).sort(JSON.parse(sort));
+  const totalIssues = await Issue.countDocuments({
+    $and: searchParameters
+  });
+  res.status(200).json({
+    success: true,
+    data: {
+      issues,
+      totalIssues
+    }
+  });
+});
+
+module.exports = { saveIssue, getIssue, getAllIssues, solveIssue, getIssues };

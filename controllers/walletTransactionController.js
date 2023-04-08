@@ -60,50 +60,12 @@ const verifyTransaction = asyncHandler(async (req, res, next) => {
   });
 });
 
-const getTransactionsByUserID = asyncHandler(async (req, res, next) => {
-  const { q, createdBy, page, size } = req.query;
-  const id = req.params.id;
-  let searchParameters = [];
-  if (q !== "{}" && q !== "") {
-    const queryParameters = q.split(",");
-    queryParameters.forEach((element) => {
-      const queryParam = JSON.parse(element);
-      const key = Object.keys(queryParam)[0];
-      const value = Object.values(queryParam)[0];
-      if (key === "dateCreated")
-        searchParameters.push({
-          [key]: {
-            $gte: `${value}T00:00:00.000Z`,
-            $lt: `${value}T23:59:59.999Z`,
-          },
-        });
-      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
-    });
-  }
-  searchParameters.push({
-    createdBy: id,
-  });
-  const transactions = await WalletTransaction.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size);
-  const totalTransactions = await WalletTransaction.countDocuments({
-    $and: searchParameters,
-  });
-  res.status(200).json({
-    success: true,
-    data: {
-      transactions,
-      totalTransactions,
-    },
-  });
-});
-
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
-  const { q, page, size } = req.query;
+  const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (q !== "{}" && q !== "") {
-    const queryParameters = q.split(",");
+  if (filters !== "{}" && filters !== "") {
+    const queryParameters = filters.split(",");
     queryParameters.forEach((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
@@ -115,6 +77,7 @@ const getTransactions = asyncHandler(async (req, res, next) => {
             $lt: `${value}T23:59:59.999Z`,
           },
         });
+      else if (key === "createdBy") searchParameters.push({ [key]: value });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
@@ -123,7 +86,8 @@ const getTransactions = asyncHandler(async (req, res, next) => {
   });
   const transactions = await WalletTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size);
+    .limit(size)
+    .sort(JSON.parse(sort));
   const totalTransactions = await WalletTransaction.countDocuments({
     $and: searchParameters,
   });
@@ -138,10 +102,10 @@ const getTransactions = asyncHandler(async (req, res, next) => {
 });
 
 const getAllTransactions = asyncHandler(async (req, res, next) => {
-  const { q, page, size } = req.query;
+  const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (q !== "{}" && q !== "") {
-    const queryParameters = q.split(",");
+  if (filters !== "{}" && filters !== "") {
+    const queryParameters = filters.split(",");
     queryParameters.forEach((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
@@ -153,13 +117,15 @@ const getAllTransactions = asyncHandler(async (req, res, next) => {
             $lt: `${value}T23:59:59.999Z`,
           },
         });
+      else if (key === "createdBy") searchParameters.push({ [key]: value });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
   const transactions = await WalletTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
     .limit(size)
-    .populate({ path: "createdBy", select: ["name", "_id"] });
+    .populate({ path: "createdBy", select: ["name", "_id"] })
+    .sort(JSON.parse(sort));
   const totalTransactions = await WalletTransaction.countDocuments({
     $and: searchParameters,
   });
@@ -190,7 +156,6 @@ module.exports = {
   addTransaction,
   verifyTransaction,
   getTransactions,
-  getTransactionsByUserID,
   getAllTransactions,
   getTransaction,
 };

@@ -91,3 +91,82 @@
 {"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:27:49.365Z"}
 {"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:18.229Z"}
 {"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:25.507Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:42.950Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:44.418Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:57.467Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:57.558Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:12.735Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:12.827Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:53.745Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:53.852Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:33:19.302Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:33:19.318Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:36:46.622Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:36:46.700Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:41:43.256Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:41:43.353Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:42:21.576Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:42:21.677Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:49:36.304Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:49:36.378Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:50:51.959Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:50:52.046Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:51:27.191Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:51:27.305Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:53:21.157Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:53:21.220Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:54:00.644Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:54:00.718Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:55:19.089Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:55:19.195Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:56:15.020Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:56:15.136Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:03:53.300Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:03:53.351Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:13:51.258Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:13:51.301Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:16:03.258Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:16:03.298Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:31:53.973Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:38:40.345Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:38:40.362Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:37.140Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:37.155Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:55.993Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:56.125Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:49:30.731Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:49:30.781Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:50:10.742Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:50:10.802Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:51:07.041Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:51:07.088Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:06.309Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:06.379Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:20.794Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:20.884Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:37.208Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:37.241Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:53:05.643Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:53:05.699Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:33:59.647Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:34:07.277Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:35:16.849Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:37:52.565Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:25:27.649Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:25:36.726Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:26:38.881Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:27:08.434Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:27:20.357Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T14:14:27.440Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T14:14:27.452Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T15:13:37.750Z"}
+{"level":"error","message":"Cannot populate path `sender` because it is not in your schema. Set the `strictPopulate` option to false to override.","timestamp":"2023-04-08T15:22:32.606Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:28:34.806Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:30:47.890Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:31:43.775Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:32:45.707Z"}
+{"level":"error","message":"Issue Already Raised for this Token ID","timestamp":"2023-04-08T17:07:01.688Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:20:58.581Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:20:58.589Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.086Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.218Z"}
