@@ -34,7 +34,7 @@ const initialLoginUser = asyncHandler(async (req, res, next) => {
   }
   const message = `
 Welcome to Drunken Bytes!\n
-Click to sign in and accept the OpenSea Terms of Service: https://drunkenbytes.vercel.app/terms-of-service\n
+Click to sign in and accept the Drunken Bytes Terms of Service: https://drunkenbytes.vercel.app/terms-of-service\n
 This request will not trigger a blockchain transaction or cost any gas fees.\n
 Your authentication status will reset after you close the browser.\n
 Wallet address:
