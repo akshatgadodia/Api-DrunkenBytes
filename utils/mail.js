@@ -98,64 +98,46 @@ const sendErrorMail = async (data) => {
 
 const sendConfirmationMail = async (data) => {
   try {
-    const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.tokenID}`;
-    const openseaURL = `${OPENSEA_URL}/${data.tokenID}`;
+    const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.txId}`;
+    const openseaURL = `${OPENSEA_URL}/${data.tokenId}`;
     let sendResult = await transporter.sendMail({
       from: "Drunken Bytes <bytes.drunken@hotmail.com>",
       to: `${data.receiverEmail}`,
       subject: `Congratulations! You've received an NFT from ${data.sellerName}`,
-      text: `Congratulations! You've Received ${data.nftName} NFT from ${
-        data.sellerName
-      }
+      text: `Congratulations! You've Received ${data.nftName} NFT from ${data.sellerName}
 
       Dear ${data.receiverName},
       
-      Congratulations! You have received an NFT from ${
-        data.sellerName
-      }. We are excited to share the details of your NFT below:
+      Congratulations! You have received an NFT from ${data.sellerName}. We are excited to share the details of your NFT below:
       
       NFT Type: ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}
       Transaction Hash: ${data.txId}
       Token ID: ${data.tokenId}
       Permanence: ${data.isBurnable ? "Non-Permanent" : "Permanent"}
-      Transferability: ${
-        data.isTransferable ? "Transferable" : "Non-Transferable"
-      }
+      Transferability: ${data.isTransferable ? "Transferable" : "Non-Transferable"}
       View Transaction on Etherscan: ${etherscanURL}
       View NFT on OpenSea: ${openseaURL}
       Please note that the NFT may be permanent or non-permanent, as indicated above. If it is non-permanent, it will vanish after a certain period of time, as specified in the NFT details. Additionally, the transferability of the NFT is also mentioned above, indicating whether it can be transferred to other wallets or not.
       
-      We hope you enjoy your NFT that is created using Drunken Bytes, a platform specializing in NFTs for businesses! If you have any questions or need further assistance, please feel free to reach out to us at https://drunkenbytes.vercel.app/raise-issue/${
-        data.tokenId
-      }.
+      We hope you enjoy your NFT that is created using Drunken Bytes, a platform specializing in NFTs for businesses! If you have any questions or need further assistance, please feel free to reach out to us at https://drunkenbytes.vercel.app/raise-issue/${data.tokenId}.
       
       Best regards,
       Drunken Bytes Team
             `,
       html: `<div>
-          <h1>Congratulations! You've Received ${data.nftName} NFT from ${
-        data.sellerName
-      }</h1>
+          <h1>Congratulations! You've Received ${data.nftName} NFT from ${data.sellerName}</h1>
           <p>
               Dear ${data.receiverName},
           </p>
           <p>
-              Congratulations! You have received an NFT from ${
-                data.sellerName
-              }. We are excited to share the details of your NFT below:
+              Congratulations! You have received an NFT from ${data.sellerName}. We are excited to share the details of your NFT below:
           </p>
           <ul>
-              <li><strong>NFT Type:</strong> ${
-                data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)
-              }</li>
+              <li><strong>NFT Type:</strong> ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}</li>
               <li><strong>Transaction Hash:</strong> ${data.txId}</li>
               <li><strong>Token ID:</strong> ${data.tokenId}</li>
-              <li><strong>Permanence:</strong> ${
-                data.isBurnable ? "Non-Permanent" : "Permanent"
-              }</li>
-              <li><strong>Transferability:</strong> ${
-                data.isTransferable ? "Transferable" : "Non-Transferable"
-              }</li>
+              <li><strong>Permanence:</strong> ${data.isBurnable ? "Non-Permanent" : "Permanent"}</li>
+              <li><strong>Transferability:</strong> ${data.isTransferable ? "Transferable" : "Non-Transferable"}</li>
           </ul>
           <p>
         You can view your NFT on Etherscan using the following link: <a href=${etherscanURL}" target="_blank">Etherscan Link</a><br>
@@ -165,9 +147,7 @@ const sendConfirmationMail = async (data) => {
               Please note that the NFT may be permanent or non-permanent, as indicated above. If it is non-permanent, it will vanish after a certain period of time, as specified in the NFT details. Additionally, the transferability of the NFT is also mentioned above, indicating whether it can be transferred to other wallets or not.
           </p>
           <p>
-              We hope you enjoy your NFT that is created using Drunken Bytes, a platform specializing in NFTs for businesses! If you have any questions or need further assistance, please feel free to reach out to us at <a href="https://drunkenbytes.vercel.app/raise-issue/${
-                data.tokenId
-              }" target="_blank">Raise Issue</a>.
+              We hope you enjoy your NFT that is created using Drunken Bytes, a platform specializing in NFTs for businesses! If you have any questions or need further assistance, please feel free to reach out to us at <a href="https://drunkenbytes.vercel.app/raise-issue/${data.tokenId}" target="_blank">Raise Issue</a>.
           </p>
           <p>
               Best regards,<br>
@@ -181,11 +161,9 @@ const sendConfirmationMail = async (data) => {
       from: "Drunken Bytes <bytes.drunken@hotmail.com>",
       to: `${data.sellerEmail}`,
       subject: `Congratulations! Your ${data.nftName} NFT has been Successfully Generated`,
-      text: `Congratulations! Your ${
-        data.nftName
-      } NFT has been Successfully Generated
+      text: `Congratulations! Your ${data.nftName} NFT has been Successfully Generated
 
-      Dear ${sellerName},
+      Dear ${data.sellerName},
       
       Congratulations! Your NFT has been successfully generated on Drunken Bytes, a platform specializing in NFTs for businesses. We are excited to share the details of your NFT below:
       
@@ -259,7 +237,7 @@ const sendConfirmationMail = async (data) => {
 
 const sendPendingMail = async (data) => {
   try {
-    const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.tokenID}`;
+    const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.txId}`;
     let sendResult = await transporter.sendMail({
       from: "Drunken Bytes <bytes.drunken@hotmail.com>",
       to: `${data.sellerEmail}`,
