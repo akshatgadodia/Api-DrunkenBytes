@@ -2,11 +2,12 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
   host: "smtp-mail.outlook.com", // hostname smtp.live.com //smtp-mail.outlook.com
-  secureConnection: false, // TLS requires secureConnection to be false
+  //secureConnection: false, // TLS requires secureConnection to be false
   port: 587, // port for secure SMTP
-  tls: {
-     ciphers:'SSLv3'
-  },
+  //tls: {
+     //ciphers:'SSLv3'
+  //},
+  secure: false,
   auth: {
       user: process.env.EMAIL_ID,
       pass: process.env.EMAIL_PASSWORD,
