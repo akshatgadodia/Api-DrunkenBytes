@@ -60,6 +60,19 @@ app.get('*', function(req, res){
 const errorHandler = require("./middlewares/errorHandler");
 app.use(errorHandler);
 
+//Scripts Scheduling
+const cron = require('node-cron');
+const burnExpiredNFTs = require('./scripts/burnExpiredNFTs');
+cron.schedule('0 0 * * *', () => {
+  // Define the cron job to run every day at midnight (0:00)
+  burnExpiredNFTs();
+});
+const resolvePendingTransactions = require('./scripts/resolvePendingTransactions');
+cron.schedule('0 * * * *', () => {
+  // Define the cron job to run every hour
+  resolvePendingTransactions();
+});
+
 //Listening om the port
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

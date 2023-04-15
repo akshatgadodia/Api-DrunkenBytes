@@ -10,7 +10,7 @@ const saveTicket = asyncHandler(async (req, res, next) => {
     type: req.body.type,
     conversation: [
       {
-        sender: req.userId,
+        sender: req.userId ?? null,
         message: req.body.message,
         sentBy: "user",
       },
