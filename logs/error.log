@@ -170,3 +170,10 @@
 {"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:20:58.589Z"}
 {"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.086Z"}
 {"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.218Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:19:58.323Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:00.488Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:00.723Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:48.249Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-10T11:16:38.775Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-10T11:16:42.245Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-10T11:19:00.243Z"}

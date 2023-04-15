@@ -101,11 +101,12 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
     // const tokenId = web3.utils.hexToNumber(
     //   transactionReceipt?.logs[0]?.topics[3]
     // );
+    const value = transactionReceipt?.effectiveGasPrice * transactionReceipt?.gasUsed;
     await sendConfirmationMail({
       ...dataToStore,
-      txId: receipt.transactionHash
+      txId: receipt.transactionHash,
+      value
     });
-    const value = transactionReceipt?.effectiveGasPrice * transactionReceipt?.gasUsed;
     const transactionCost = await web3.utils.fromWei(value.toString(), "ether");
     return { result: "Success", value: transactionCost };
   } catch (err) {
@@ -115,12 +116,12 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
     ) {
       console.log("TRANSACTION PENDING ON BLOCKCHAIN");
       console.log(err);
-      await sendPendingMail({ ...dataToStore, txId: signedTx.transactionHash });
+      await sendPendingMail({ ...dataToStore, txId: signedTx.transactionHash, value: 0  });
       return { result: "Pending", value: 0 };
     } else {
       console.log("NFT CREATION FAILED");
       console.log(err);
-      await sendErrorMail({ ...dataToStore, txId: signedTx.transactionHash });
+      await sendErrorMail({ ...dataToStore, txId: signedTx.transactionHash, value: 0  });
       return { result: "Failed", value: 0 };
     }
   }

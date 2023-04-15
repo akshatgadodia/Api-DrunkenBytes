@@ -12,6 +12,7 @@ const saveTicket = asyncHandler(async (req, res, next) => {
       {
         sender: req.userId,
         message: req.body.message,
+        sentBy: "user",
       },
     ],
     lastUpdated: new Date(),
