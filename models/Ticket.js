@@ -40,7 +40,6 @@ const ticketSchema = new Schema({
       },
       sender: {
         type: Schema.Types.ObjectId,
-        required: true,
         refPath: 'conversation.sentBy'
       },
       message: {
