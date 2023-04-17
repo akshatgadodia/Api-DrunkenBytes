@@ -72,6 +72,23 @@ cron.schedule('0 * * * *', () => {
   // Define the cron job to run every hour
   resolvePendingTransactions();
 });
+// Define a cron job that runs every 14 minutes
+cron.schedule('*/14 * * * *', () => {
+  // Send a request to the desired URL
+  const https = require('https');
+  const options = {
+    hostname: 'https://api-drunkenbytes.onrender.com',
+    path: '/',
+    method: 'GET',
+  };
+  const req = https.request(options, (res) => {
+    console.log(`Ping request sent successfully with status code: ${res.statusCode}`);
+  });
+  req.on('error', (error) => {
+    console.error('Failed to send ping request:', error);
+  });
+  req.end();
+});
 
 //Listening om the port
 app.listen(port, () => {
