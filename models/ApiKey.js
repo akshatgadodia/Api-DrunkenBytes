@@ -13,7 +13,6 @@ const apiKeySchema = new Schema({
     unique: true,
     required: [true, "API KEY is required"]
   },
-  expiryDate: Date
 });
 
 module.exports = new mongoose.model("api-key", apiKeySchema);

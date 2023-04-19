@@ -1,4 +1,5 @@
-const CONTRACT_ADDRESS = '0x8816611C0702674e597a6219Fb17d60b042b1de1';//'0x15B8e16DBA7821D336606f9D25cbb374beb08ffd';
+const CONTRACT_ADDRESS = '0x006bA5d8B2887A8bacFD321AF5F79aF13b7E60F0';
+//'0x15B8e16DBA7821D336606f9D25cbb374beb08ffd'; //'0x04D2829cA0A3954816f1f791578255CccdF6a5D4'; //'0x8816611C0702674e597a6219Fb17d60b042b1de1';
 const ACCOUNT_ADDRESS = '0xdCFF746b4EBa3446c2ec3794A0961785c7c93013';
 const ABI = [
 	{
@@ -111,6 +112,11 @@ const ABI = [
 				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isSoulbound",
+				"type": "bool"
 			},
 			{
 				"internalType": "string",
@@ -298,6 +304,25 @@ const ABI = [
 			}
 		],
 		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "isSoulbound",
 		"outputs": [
 			{
 				"internalType": "bool",

@@ -28,7 +28,7 @@ const verifyUser = asyncHandler(async (req, next) => {
   return { user, status: true };
 });
 
-const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
+const signWeb3Transaction = async (res, next, dataToStore) => {
   try {
     const storedDataLink = await saveDataOnIPFS(dataToStore);
     const contract = await new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
@@ -36,6 +36,7 @@ const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
     let tx = await contract.methods.safeMint(
         dataToStore.receiverWalletAddress,
         dataToStore.tokenId,
+        dataToStore.isTransferable,
         storedDataLink
       );
     const data = tx.encodeABI();
@@ -46,9 +47,10 @@ const signWeb3Transaction = async (res, next, dataToStore, walletBalance) => {
     });
     const gasPrice = await web3.eth.getGasPrice();
     // const price = web3.utils.toHex(web3.utils.toWei('1', 'gwei'));
-    const transactionCost = gasPrice * gas;
+    let transactionCost = gasPrice * gas;
+    transactionCost = Math.round(transactionCost * (1 + (dataToStore.commissionPercent / 100)));
     if (
-      walletBalance <=
+      dataToStore.walletBalance <=
       (await web3.utils.fromWei(transactionCost.toString(), "ether"))
     ) {
       return next(new ErrorResponse("Insufficient Wallet Balance", 403));
@@ -103,7 +105,7 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
       ...dataToStore,
       txId: receipt.transactionHash
     });
-    const value = transactionReceipt.effectiveGasPrice * transactionReceipt.gasUsed;
+    const value = transactionReceipt?.effectiveGasPrice * transactionReceipt?.gasUsed;
     const transactionCost = await web3.utils.fromWei(value.toString(), "ether");
     return { result: "Success", value: transactionCost };
   } catch (err) {
@@ -114,7 +116,7 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
       console.log("TRANSACTION PENDING ON BLOCKCHAIN");
       console.log(err);
       await sendPendingMail({ ...dataToStore, txId: signedTx.transactionHash });
-      return { result: "Pending", value: NaN };
+      return { result: "Pending", value: 0 };
     } else {
       console.log("NFT CREATION FAILED");
       console.log(err);
@@ -135,14 +137,15 @@ const storeTransactionDataAndDecreaseUserBalance = async (req, data) => {
       value: data.value,
       receiverName: data.receiverName,
       receiverEmail: data.receiverEmail,
-      receiverWalletAddress: req.body.receiverWalletAddress,
-      nftType: req.body.nftType,
-      nftName: req.body.nftName,
-      useCustomImage: req.body.useCustomImage,
-      isTransferable: req.body.isTransferable,
-      isBurnable: req.body.isBurnable,
-      burnAfter: req.body.burnAfter,
-      traits: req.body.traits,
+      receiverWalletAddress: data.receiverWalletAddress,
+      nftType: data.nftType,
+      nftName: data.nftName,
+      useCustomImage: data.useCustomImage,
+      isTransferable: data.isTransferable,
+      isBurnable: data.isBurnable,
+      burnAfter: data.burnAfter,
+      traits: data.traits,
+      commissionCharged: data.commissionPercent,
     };
     await new NftTransaction(transactionData).save();
     if (data.status !== "Failed") {
@@ -186,6 +189,8 @@ const processNFT = async (req, res, next) => {
     const dataToStore = {
       sellerEmail: user.email,
       sellerName: user.name,
+      commissionPercent: user.commissionPercent,
+      walletBalance: user.walletBalance,
       receiverName: req.body.receiverName,
       receiverEmail: req.body.receiverEmail,
       receiverWalletAddress: req.body.receiverWalletAddress,
@@ -203,8 +208,7 @@ const processNFT = async (req, res, next) => {
     const signedTx = await signWeb3Transaction(
       res,
       next,
-      dataToStore,
-      user.walletBalance
+      dataToStore
     );
     if (signedTx !== undefined) {
       //Sending Web3 Transaction to Blockchain
@@ -230,7 +234,7 @@ const processNFT = async (req, res, next) => {
 
 const estimateNFTGenerationCost = async (req, res, next) => {
   const gasPrice = await web3.eth.getGasPrice();
-  const transactionCost = await web3.utils.fromWei((gasPrice * 152122).toString(), "ether");
+  const transactionCost = await web3.utils.fromWei((gasPrice * 184875).toString(), "ether");
   res.status(201).json({
     success: true,
     data: {

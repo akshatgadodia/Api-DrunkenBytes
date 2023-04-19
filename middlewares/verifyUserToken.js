@@ -3,6 +3,7 @@ var jwt = require("jsonwebtoken");
 
 const verifyUserToken = (req, res, next) => {
   // console.log("Executed verifyUserToken in authentication in middlewware")
+  // console.log(req.originSource);
   let token;
   if (req.originSource === "ANOTHER") {
     if (req.query.api_key === undefined) return next(new ErrorResponse("Missing API Key", 401));
@@ -10,7 +11,8 @@ const verifyUserToken = (req, res, next) => {
     if (!authHeader?.startsWith('Bearer')) return next(new ErrorResponse("Unauthorized access", 401));
     token = req.headers.authorization.split(" ")[1];
   } else if (req.originSource === "MAIN") {
-    token = req.cookies["userAccessToken"];
+    // console.log("HERE I WAS")
+    token = req.cookies["db_userAccessToken"];
     if (token === undefined || token === null) return next(new ErrorResponse("Session Expired", 404));
   } else {
     token = req.cookies["supportUserAccessToken"];

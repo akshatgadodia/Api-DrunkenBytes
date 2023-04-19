@@ -41,4 +41,8 @@ router.use("/v1/product", productRoute);
 const downloadRoute = require("./downloadRoute");
 router.use("/v1/download", downloadRoute);
 
+const issueRoute = require("./issueRoute");
+router.use("/v1/issue", issueRoute);
+
+
 module.exports = router;

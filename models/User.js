@@ -12,6 +12,7 @@ const userSchema = new Schema({
   name: { type: String, required: false },
   email: { type: String, trim: true, lowercase: true, required: false },
   walletBalance: { type: Number, default: 0.0001 },
+  commissionPercent: { type: Number, default: 5.00 },
   roles: { type: Object },
   verified: {type: Boolean, default: false},
   verifiedBy: { type: Schema.Types.ObjectId, ref: "supportUser" },

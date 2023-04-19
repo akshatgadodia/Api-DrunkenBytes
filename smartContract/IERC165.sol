@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-
 pragma solidity >=0.4.0 <0.9.0;
-//pragma solidity >=0.7.0 <0.9.0;
-
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -13,6 +10,7 @@ pragma solidity >=0.4.0 <0.9.0;
  *
  * For an implementation, see {ERC165}.
  */
+ 
 interface IERC165 {
     /**
      * @dev Returns true if this contract implements the interface defined by

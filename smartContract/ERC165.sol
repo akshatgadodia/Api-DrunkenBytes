@@ -5,7 +5,6 @@ pragma solidity >=0.4.0 <0.9.0;
 
 
 import "./IERC165.sol";
-
 /**
  * @dev Implementation of the {IERC165} interface.
  *

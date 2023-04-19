@@ -32,7 +32,6 @@ abstract contract ERC721URIStorage is NFT {
         if (bytes(_tokenURI).length > 0) {
             return string(abi.encodePacked(base, _tokenURI));
         }
-
         return super.tokenURI(tokenId);
     }
 
@@ -49,15 +48,9 @@ abstract contract ERC721URIStorage is NFT {
     }
 
     /**
-     * @dev See {ERC721-_burn}. This override additionally checks to see if a
-     * token-specific URI was set for the token, and if so, it deletes the token URI from
-     * the storage mapping.
+     * @dev See .
      */
-    function _burn(uint256 tokenId) internal virtual override {
-        super._burn(tokenId);
-
-        if (bytes(_tokenURIs[tokenId]).length != 0) {
-            delete _tokenURIs[tokenId];
-        }
+    function _deleteTokenURIs(uint256 tokenId) internal  {
+         delete _tokenURIs[tokenId];
     }
 }
