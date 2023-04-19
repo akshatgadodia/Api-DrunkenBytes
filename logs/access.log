@@ -4999,3 +4999,6 @@
 {"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-04-10T13:13:46.824Z"}
 {"level":"info","message":"OPTIONS /v1/user/logout","timestamp":"2023-04-10T13:19:18.242Z"}
 {"level":"info","message":"POST /v1/user/logout","timestamp":"2023-04-10T13:19:18.387Z"}
+{"level":"info","message":"GET /v1/nft/get-nft-generation-cost","timestamp":"2023-04-19T16:31:11.186Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-04-19T16:31:11.291Z"}
+{"level":"info","message":"GET /v1/admin-dashboard/get-performance-data","timestamp":"2023-04-19T16:31:11.317Z"}
