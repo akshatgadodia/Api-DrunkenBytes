@@ -6,7 +6,7 @@ const User = require("../models/User");
 const ApiKey = require("../models/ApiKey");
 const NftTransaction = require("../models/NftTransaction");
 const Issue = require("../models/Issue");
-const Product = require("../models/Product");
+const Template = require("../models/Template");
 
 const { v4: uuidv4 } = require('uuid');
 const { web3 } = require("../config/web3");
@@ -34,7 +34,7 @@ const initialLoginUser = asyncHandler(async (req, res, next) => {
   }
   const message = `
 Welcome to Drunken Bytes!\n
-Click to sign in and accept the OpenSea Terms of Service: https://drunkenbytes.vercel.app/terms-of-service\n
+Click to sign in and accept the Drunken Bytes Terms of Service: https://drunkenbytes.vercel.app/terms-of-service\n
 This request will not trigger a blockchain transaction or cost any gas fees.\n
 Your authentication status will reset after you close the browser.\n
 Wallet address:
@@ -100,10 +100,20 @@ const updateUserData = asyncHandler(async (req, res, next) => {
   });
 });
 
+const verifyUser = asyncHandler(async (req, res, next) => {
+  await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { verified: true, verifiedBy: req.userId}
+  );
+  res.status(200).json({
+    success: true,
+    data: { message: "User Verified Successfully" }
+  });
+});
 
 const getUser = asyncHandler(async (req, res, next) => {
   const userId = req.query.userId;
-  const user = await User.findOne({ _id: userId });
+  const user = await User.findOne({ _id: userId }).populate({ path: "verifiedBy", select: ["name", "_id"] });;
   res.status(200).json({
     success: true,
     data: {
@@ -119,7 +129,7 @@ const getUserProfile = asyncHandler(async (req, res, next) => {
   const pendingTransactions = await NftTransaction.countDocuments({createdBy: req.userId, status: "pending"});
   const totalIssues = await Issue.countDocuments({issueFor: req.userId});
   const solvedIssues = await Issue.countDocuments({issueFor: req.userId, isSolved: true});
-  const templates = await Product.countDocuments({createdBy: req.userId});
+  const templates = await Template.countDocuments({createdBy: req.userId});
   const result = await NftTransaction.find({createdBy: req.userId}).sort({dateCreated: -1});
   const value = result.reduce((accumulator, transaction) => accumulator + transaction.value, 0);
   res.status(200).json({
@@ -153,7 +163,7 @@ const getAllUsers = asyncHandler(async (req, res, next) => {
   }
   const users = await User.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size)
+    .limit(size).populate({ path: "verifiedBy", select: ["name", "_id"] });
   const totalUsers = await User.countDocuments({ $and: searchParameters });
   res.status(200).json({
     success: true,
@@ -181,4 +191,4 @@ const saveUserRegisterRequest = asyncHandler(async (req, res, next) => {
     }
   });
 });
-module.exports = { loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser, saveUserRegisterRequest, getUserProfile };
+module.exports = { verifyUser, loginUser, updateUserData, getUser, getAllUsers, logoutUser, initialLoginUser, saveUserRegisterRequest, getUserProfile };

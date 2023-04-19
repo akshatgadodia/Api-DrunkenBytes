@@ -1,0 +1,179 @@
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:36.751Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:36.985Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:37.080Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.117Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.142Z"}
+{"level":"error","message":"Session Expired","timestamp":"2023-03-19T23:20:45.253Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.539Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.555Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.582Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.632Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.641Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:22.648Z"}
+{"level":"error","message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/","timestamp":"2023-03-20T02:56:31.790Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-03-20T03:30:18.964Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-03-20T03:30:19.505Z"}
+{"level":"error","message":"WalletTransaction.save is not a function","timestamp":"2023-03-20T03:42:55.493Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:46:43.513Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:46:43.587Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:47:41.604Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:47:41.687Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:48:53.107Z"}
+{"level":"error","message":"apiKeys is not defined","timestamp":"2023-03-24T16:48:53.249Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T17:57:31.516Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T18:00:23.634Z"}
+{"level":"error","message":"API Key Not Found","timestamp":"2023-03-24T18:00:35.320Z"}
+{"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:38:13.586Z"}
+{"level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan eg: \"1d\", \"20h\", 60","timestamp":"2023-03-24T18:39:45.213Z"}
+{"level":"error","message":"expiryDate is not defined","timestamp":"2023-03-24T18:41:45.233Z"}
+{"level":"error","message":"Template Not Found","timestamp":"2023-03-26T08:20:02.576Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:33:51.607Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:33:59.425Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:06.889Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:31.123Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T16:34:51.417Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:49.097Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:55.265Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:57:59.420Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T16:59:01.096Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:01:32.734Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:01:46.830Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:02:08.253Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:03:01.101Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-03-26T17:04:27.610Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-03-26T17:50:26.304Z"}
+{"level":"error","message":"ApiKey is not defined","timestamp":"2023-03-26T19:13:34.859Z"}
+{"level":"error","message":"Issue Already Raised for this Token ID","timestamp":"2023-03-26T19:16:22.526Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:21:43.743Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:22:14.537Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:22:25.462Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:22:57.155Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:24:35.876Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:25:09.769Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:25:57.769Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:26:34.049Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:27:11.721Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:31:35.137Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:44:45.222Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-27T06:45:00.051Z"}
+{"level":"error","message":"Some Error Occurred","timestamp":"2023-03-27T06:45:59.925Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'totalAmount')","timestamp":"2023-03-27T14:50:14.845Z"}
+{"level":"error","message":"NftTransaction.find(...).sum is not a function","timestamp":"2023-03-27T15:03:17.356Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:25:58.720Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:26:58.807Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:27:24.181Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:29:08.969Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:31:47.599Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-28T07:34:36.265Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:49.426Z"}
+{"level":"error","message":"page is not defined","timestamp":"2023-03-28T07:38:55.293Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-06T15:50:49.506Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-06T15:50:58.463Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-06T15:51:34.315Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-06T15:52:04.718Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:26.984Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:27.043Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:47.133Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:47.185Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:58.006Z"}
+{"level":"error","message":"q is not defined","timestamp":"2023-04-06T16:54:58.167Z"}
+{"level":"error","message":"Image Base 64 Not Available","timestamp":"2023-04-07T12:31:09.389Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:00:41.338Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:01:45.781Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:02:07.746Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:12:40.721Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:12:48.257Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:13:11.503Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-07T15:13:18.312Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:13:49.304Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:13:56.080Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:14:52.086Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-07T15:27:49.365Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:18.229Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-07T15:41:25.507Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:42.950Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:44.418Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:57.467Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:27:57.558Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:12.735Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:12.827Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:53.745Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:31:53.852Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:33:19.302Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:33:19.318Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:36:46.622Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:36:46.700Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:41:43.256Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:41:43.353Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:42:21.576Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:42:21.677Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:49:36.304Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:49:36.378Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:50:51.959Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:50:52.046Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:51:27.191Z"}
+{"level":"error","message":"Unauthorized access","timestamp":"2023-04-08T07:51:27.305Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:53:21.157Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:53:21.220Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:54:00.644Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:54:00.718Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:55:19.089Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:55:19.195Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:56:15.020Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T07:56:15.136Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:03:53.300Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:03:53.351Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:13:51.258Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:13:51.301Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:16:03.258Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:16:03.298Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T08:31:53.973Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:38:40.345Z"}
+{"level":"error","message":"Can't use $regex","timestamp":"2023-04-08T08:38:40.362Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:37.140Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:37.155Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:55.993Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:45:56.125Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:49:30.731Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:49:30.781Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:50:10.742Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:50:10.802Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:51:07.041Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:51:07.088Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:06.309Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:06.379Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:20.794Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:20.884Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:37.208Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:52:37.241Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:53:05.643Z"}
+{"level":"error","message":"Resource not found","timestamp":"2023-04-08T09:53:05.699Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:33:59.647Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:34:07.277Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:35:16.849Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T12:37:52.565Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:25:27.649Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:25:36.726Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:26:38.881Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:27:08.434Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T13:27:20.357Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T14:14:27.440Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T14:14:27.452Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-08T15:13:37.750Z"}
+{"level":"error","message":"Cannot populate path `sender` because it is not in your schema. Set the `strictPopulate` option to false to override.","timestamp":"2023-04-08T15:22:32.606Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:28:34.806Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:30:47.890Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:31:43.775Z"}
+{"level":"error","message":"Schema hasn't been registered for model \"model\".\nUse mongoose.model(name, schema)","timestamp":"2023-04-08T15:32:45.707Z"}
+{"level":"error","message":"Issue Already Raised for this Token ID","timestamp":"2023-04-08T17:07:01.688Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:20:58.581Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:20:58.589Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.086Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-08T17:21:15.218Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:19:58.323Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:00.488Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:00.723Z"}
+{"level":"error","message":"Missing API Key","timestamp":"2023-04-10T07:20:48.249Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-10T11:16:38.775Z"}
+{"level":"error","message":"Permission Denied","timestamp":"2023-04-10T11:16:42.245Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'split')","timestamp":"2023-04-10T11:19:00.243Z"}

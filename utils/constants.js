@@ -430,6 +430,7 @@ const ABI = [
 		"type": "function"
 	}
 ]
+const BLOCK_EXPLORER_URL = "https://goerli.etherscan.io/tx";
+const OPENSEA_URL = "https://testnets.opensea.io/assets/goerli";
 
-
-module.exports = { CONTRACT_ADDRESS, ACCOUNT_ADDRESS, ABI }
+module.exports = { CONTRACT_ADDRESS, ACCOUNT_ADDRESS, ABI, BLOCK_EXPLORER_URL, OPENSEA_URL }
