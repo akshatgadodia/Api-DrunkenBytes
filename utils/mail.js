@@ -170,7 +170,7 @@ const sendConfirmationMail = async (data) => {
       Best regards,
       Drunken Bytes Team`,
       html: `<div><h1>Congratulations! Your ${data.nftName} NFT has been Successfully Generated</h1>
-      <p>Dear ${sellerName},</p>
+      <p>Dear ${data.sellerName},</p>
       <p>
         Congratulations! Your NFT has been successfully generated on Drunken Bytes, a platform specializing in NFTs for businesses. We are excited to share the details of your NFT below:
       </p>
@@ -215,6 +215,8 @@ const sendPendingMail = async (data) => {
       subject: `Congratulations! Your ${nftName} NFT Generation is Underway`,
       text: `Congratulations! Your ${nftName} NFT Generation is Underway
 
+      Dear ${data.sellerName},
+
       Your NFT generation process has been initiated by Drunken Bytes, a platform specializing in NFTs for businesses. We are excited to share the details of your NFT below:
       
       - NFT Type: ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}
@@ -237,6 +239,9 @@ const sendPendingMail = async (data) => {
       Best regards,
       Drunken Bytes Team`,
       html: `<div><h1>Congratulations! Your ${nftName} NFT Generation is Underway</h1>
+      <p>
+      Dear ${data.sellerName},
+      </p>
       <p>Your NFT generation process has been initiated by Drunken Bytes, a platform specializing in NFTs for businesses. We are excited to share the details of your NFT below:</p>
       <ul>
         <li><strong>NFT Type:</strong> ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}</li>
@@ -260,4 +265,117 @@ const sendPendingMail = async (data) => {
   }
 };
 
-module.exports = { sendConfirmationMail, sendErrorMail, sendPendingMail };
+const sendBurnMail = async (data) => {
+  try {
+    const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.txId}`;
+    let sendResult = await transporter.sendMail({
+      from: "Drunken Bytes <bytes.drunken@hotmail.com>",
+      to: `${data.sellerEmail}`,
+      subject: `Notification of ${data.nftName} NFT Burn`,
+      text: `Notification of ${data.nftName} NFT Burn
+
+      Dear ${data.sellerName},
+
+      The ${data.nftName} NFT that you created has been burned and is no longer in the user possession.
+      The burn was initiated as the NFT has expired.
+
+      The details of your NFT are:
+      
+      - NFT Type: ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}
+      - Transaction Hash: ${data.txId}
+      - Token ID: ${data.tokenId}
+      - Permanence: Non-Permanent
+      - Transferability: ${data.isTransferable ? "Transferable" : "Non-Transferable"}
+      - View Transaction on Etherscan: ${etherscanURL}
+      
+      Please note that once an NFT is burned, it cannot be recovered. The action is irreversible, and the NFT will no longer exist on the blockchain. You will not be able to transfer, sell or trade this NFT anymore.
+      If you have any questions or concerns regarding the NFT burn process, please do not hesitate to contact us. Our support team is always available to assist you.
+      
+      Best regards,
+      Drunken Bytes Team`,
+      html: `<div><h1>Notification of ${data.nftName} NFT Burn</h1>
+      <p>
+      Dear ${data.sellerName},
+      </p>
+      <p>
+              The ${data.nftName} NFT that you created has been burned and is no longer in the user possession.<br/>
+              The burn was initiated as the NFT has expired.<br/><br/>
+              The details of the NFT are:
+          </p>
+          <ul>
+              <li><strong>NFT Type:</strong> ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}</li>
+              <li><strong>Transaction Hash:</strong> ${data.txId}</li>
+              <li><strong>Token ID:</strong> ${data.tokenId}</li>
+              <li><strong>Permanence:</strong> Non-Permanent</li>
+              <li><strong>Transferability:</strong> ${data.isTransferable ? "Transferable" : "Non-Transferable"}</li>
+          </ul>
+          <p>
+              Please note that once an NFT is burned, it cannot be recovered. The action is irreversible, and the NFT will no longer exist on the blockchain. You will not be able to transfer, sell or trade this NFT anymore.
+          </p>
+          <p>
+             If you have any questions or concerns regarding the NFT burn process, please do not hesitate to contact us. Our support team is always available to assist you.
+          </p>
+          <p>
+              Best regards,<br>
+              Drunken Bytes Team
+          </p></div>`,
+    });
+
+    sendResult = await transporter.sendMail({
+      from: "Drunken Bytes <bytes.drunken@hotmail.com>",
+      to: `${data.receiverEmail}`,
+      subject: `Notification of Your ${data.nftName} NFT Burn`,
+      text: `Notification of Your ${data.nftName} NFT Burn
+
+      Dear ${data.receiverName},
+      
+      Your ${data.nftName} NFT has been burned and is no longer in your possession.
+      The burn was initiated as the NFT has expired.
+
+      The details of your NFT are:
+      
+      - NFT Type: ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}
+      - Transaction Hash: ${data.txId}
+      - Token ID: ${data.tokenId}
+      - Permanence: Non-Permanent
+      - Transferability: ${data.isTransferable ? "Transferable" : "Non-Transferable"}
+      - View Transaction on Etherscan: ${etherscanURL}
+      
+      Please note that once an NFT is burned, it cannot be recovered. The action is irreversible, and the NFT will no longer exist on the blockchain. You will not be able to transfer, sell or trade this NFT anymore.
+      If you have any questions or concerns regarding the NFT burn process, please do not hesitate to contact us. Our support team is always available to assist you.
+      
+      Best regards,
+      Drunken Bytes Team`,
+      html: `<div><h1>Notification of Your ${data.nftName} NFT Burn</h1>
+          <p>
+              Dear ${data.receiverName},
+          </p>
+          <p>
+              Your ${data.nftName} NFT has been burned and is no longer in your possession.<br/>
+              The burn was initiated as the NFT has expired.<br/><br/>
+              The details of your NFT are:
+          </p>
+          <ul>
+              <li><strong>NFT Type:</strong> ${data.nftType.charAt(0).toUpperCase() + data.nftType.slice(1)}</li>
+              <li><strong>Transaction Hash:</strong> ${data.txId}</li>
+              <li><strong>Token ID:</strong> ${data.tokenId}</li>
+              <li><strong>Permanence:</strong> Non-Permanent</li>
+              <li><strong>Transferability:</strong> ${data.isTransferable ? "Transferable" : "Non-Transferable"}</li>
+          </ul>
+          <p>
+              Please note that once an NFT is burned, it cannot be recovered. The action is irreversible, and the NFT will no longer exist on the blockchain. You will not be able to transfer, sell or trade this NFT anymore.
+          </p>
+          <p>
+             If you have any questions or concerns regarding the NFT burn process, please do not hesitate to contact us. Our support team is always available to assist you.
+          </p>
+          <p>
+              Best regards,<br>
+              Drunken Bytes Team
+          </p></div>`,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { sendConfirmationMail, sendErrorMail, sendPendingMail, sendBurnMail };
