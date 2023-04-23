@@ -6,12 +6,14 @@ const apiKeySchema = new Schema({
   createdBy: { type: Schema.Types.ObjectId, ref: "user" },
   name: {
     type: String,
-    required: [true, "API Name is required"]
+    required: [true, "API Name is required"],
+    trim: true,
   },
   apiKey: {
     type: String,
     unique: true,
-    required: [true, "API KEY is required"]
+    required: [true, "API KEY is required"],
+    trim: true,
   },
 });
 

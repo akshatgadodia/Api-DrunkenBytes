@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const { Schema } = mongoose;
 
@@ -18,7 +19,12 @@ const issueSchema = new Schema({
   },
   email: {
     type: String,
-    required: [true, "Email is required"]
+    trim: true,
+    required: [true, "Email is required"],
+    validate: {
+      validator: (value) => validator.isEmail(value),
+      message: "Invalid email address",
+    },
   },
   subject: {
     type: String,
@@ -30,6 +36,7 @@ const issueSchema = new Schema({
   },
   date: {
     type: Date,
+    default: Date.now,
     required: [true, "Date is required"]
   },
   isSolved: {

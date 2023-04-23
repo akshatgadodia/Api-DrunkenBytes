@@ -2,24 +2,23 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
-const Transaction = require("../models/NftTransaction");
+const NftTransaction = require("../models/NftTransaction");
 
 const getPerformanceData = asyncHandler(async (req, res, next) => {
-  // console.log(req.body);
-  const users = await User.countDocuments({});
-  const nfts = await Transaction.countDocuments({status: "Success"});
-  const values = await Transaction.find({status: "Success"});
-  let total=0
-  values.forEach((transaction)=>{
-    total+=transaction.value
-  })
-
+  const [businessServed, nftsCreated, netTransactionValue] = await Promise.all([
+    User.countDocuments({}),
+    NftTransaction.countDocuments({ status: "Success" }),
+    NftTransaction.aggregate([
+      { $match: { status: "Success" } },
+      { $group: { _id: null, total: { $sum: "$value" } } },
+    ]).then((result) => result[0]?.total || 0), // handle empty result
+  ]);
   res.status(201).json({
     success: true,
     data: {
-      businessServed : users,
-      nftsCreated: nfts,
-      netTransactionValue: total
+      businessServed,
+      nftsCreated,
+      netTransactionValue
     }
   });
 });

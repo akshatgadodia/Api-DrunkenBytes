@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const timestamp = require('mongoose-timestamp');
 
 const { Schema } = mongoose;
 
@@ -10,49 +11,16 @@ const blogSchema = new Schema({
   url: {
     type: String,
     unique:true,
-    required: [true, "Blog url is required"]
+    required: [true, "Blog url is required"],
+    index: true,
   },
-  photo:{
-    type:String,
-    required:true,
+  image: {
+    type: String,
+    required: [true, "Blog image is required"]
   },
-  content:[
-    {
-        blocks:[
-            {
-                data:{
-                        
-                      type:Object,
-                      required:true
-                },
-                id:{
-                    type:String,
-                    required:true
-                },
-                type:{
-                    type:String,
-                    required:true
-                }
-            }
-        ],
-        version:{
-            type:String,
-            required:true,
-        },
-        time:{
-            type:Number,
-            required:true
-        }
-    },
-],
-  dateCreated:{
-    type:Date,
-    default:Date.now,
-  },
-  dateUpdated:{
-    type:Date,
-    default:Date.now,
-  }
+  content: Object,
 });
+
+blogSchema.plugin(timestamp);
 
 module.exports = new mongoose.model("blog", blogSchema);

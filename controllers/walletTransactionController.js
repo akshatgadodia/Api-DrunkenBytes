@@ -63,10 +63,9 @@ const verifyTransaction = asyncHandler(async (req, res, next) => {
 const getTransactions = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
   const { filters, page, size, sort } = req.query;
-  let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  let searchParameters = [{ createdBy }];
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
@@ -81,17 +80,14 @@ const getTransactions = asyncHandler(async (req, res, next) => {
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  searchParameters.push({
-    createdBy: createdBy,
-  });
-  const transactions = await WalletTransaction.find({ $and: searchParameters })
+  const [totalTransactions, transactions] = await Promise.all([
+    WalletTransaction.countDocuments({
+      $and: searchParameters
+    }),
+    WalletTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size)
-    .sort(JSON.parse(sort));
-  const totalTransactions = await WalletTransaction.countDocuments({
-    $and: searchParameters,
-  });
-
+    .limit(size).sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {
@@ -104,9 +100,8 @@ const getTransactions = asyncHandler(async (req, res, next) => {
 const getAllTransactions = asyncHandler(async (req, res, next) => {
   const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
@@ -121,14 +116,14 @@ const getAllTransactions = asyncHandler(async (req, res, next) => {
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  const transactions = await WalletTransaction.find({ $and: searchParameters })
+  const [totalTransactions, transactions] = await Promise.all([
+    WalletTransaction.countDocuments({
+      $and: searchParameters
+    }),
+    WalletTransaction.find({ $and: searchParameters })
     .skip((page - 1) * size)
-    .limit(size)
-    .populate({ path: "createdBy", select: ["name", "_id"] })
-    .sort(JSON.parse(sort));
-  const totalTransactions = await WalletTransaction.countDocuments({
-    $and: searchParameters,
-  });
+    .limit(size).populate({ path: "createdBy", select: ["name", "_id"] }).sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {

@@ -52,26 +52,24 @@ const deleteAPIKey = asyncHandler(async (req, res, next) => {
 const getApiKeys = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
   const { filters, page, size, sort } = req.query;
-  let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  let searchParameters = [{ createdBy }];
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
       searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  searchParameters.push({
-    createdBy: createdBy,
-  });
-  const apiKeys = await ApiKey.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size)
-    .sort(JSON.parse(sort));
-  const totalApiKeys = await ApiKey.countDocuments({
-    $and: searchParameters,
-  });
+  const [totalApiKeys, apiKeys] = await Promise.all([
+    ApiKey.countDocuments({
+      $and: searchParameters,
+    }),
+    ApiKey.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size)
+      .sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {
@@ -84,23 +82,25 @@ const getApiKeys = asyncHandler(async (req, res, next) => {
 const getAllApiKeys = asyncHandler(async (req, res, next) => {
   const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
-      if(key === "createdBy") searchParameters.push({ [key]: value });
+      if (key === "createdBy") searchParameters.push({ [key]: value });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  const apiKeys = await ApiKey.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size).populate({ path: "createdBy", select: ["name", "_id"] })
-    .sort(JSON.parse(sort));
-  const totalApiKeys = await ApiKey.countDocuments({
-    $and: searchParameters,
-  });
+  const [totalApiKeys, apiKeys] = await Promise.all([
+    ApiKey.countDocuments({
+      $and: searchParameters,
+    }),
+    ApiKey.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size)
+      .populate({ path: "createdBy", select: ["name", "_id"] })
+      .sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {

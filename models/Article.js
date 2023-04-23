@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const timestamp = require('mongoose-timestamp');
 
 const { Schema } = mongoose;
 
@@ -10,21 +11,16 @@ const articleSchema = new Schema({
   url: {
     type: String,
     unique: true,
-    required: [true, "Article url is required"]
+    required: [true, "Article url is required"],
+    index: true,
   },
   image: {
     type: String,
     required: [true, "Article image is required"]
   },
   content: Object,
-  dateCreated: {
-    type: Date,
-    default: Date.now,
-  },
-  dateUpdated: {
-    type: Date,
-    default: Date.now,
-  }
 });
+
+articleSchema.plugin(timestamp);
 
 module.exports = new mongoose.model("article", articleSchema);

@@ -103,10 +103,9 @@ const getTicketById = asyncHandler(async (req, res, next) => {
 const getTickets = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
   const { filters, page, size, sort } = req.query;
-  let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  let searchParameters = [{ createdBy }];
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
@@ -128,16 +127,15 @@ const getTickets = asyncHandler(async (req, res, next) => {
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  searchParameters.push({
-    createdBy: createdBy,
-  });
-  const tickets = await Ticket.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size)
-    .sort(JSON.parse(sort)).select({conversation: 0, createdBy: 0});
-  const totalTickets = await Ticket.countDocuments({
-    $and: searchParameters,
-  });
+  const [totalTickets, tickets] = await Promise.all([
+    Ticket.countDocuments({
+      $and: searchParameters,
+    }),
+    Ticket.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size)
+      .sort(JSON.parse(sort)).select({conversation: 0, createdBy: 0}),
+  ]);
   res.status(200).json({
     success: true,
     data: {
@@ -150,9 +148,8 @@ const getTickets = asyncHandler(async (req, res, next) => {
 const getAllTickets = asyncHandler(async (req, res, next) => {
   const { filters, page, size, sort } = req.query;
   let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
@@ -178,14 +175,15 @@ const getAllTickets = asyncHandler(async (req, res, next) => {
   else if (req.roles.includes(7489)) searchParameters.push({ type: "Support" });
   else if (req.roles.includes(3894)) searchParameters.push({ type: "Editor" });
   else if (req.roles.includes(8458)) searchParameters.push({ type: "Sales" });
-  const tickets = await Ticket.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size)
-    .populate({ path: "createdBy", select: ["name", "_id"] })
-    .sort(JSON.parse(sort));
-  const totalTickets = await Ticket.countDocuments({
-    $and: searchParameters,
-  });
+  const [totalTickets, tickets] = await Promise.all([
+    Ticket.countDocuments({
+      $and: searchParameters,
+    }),
+    Ticket.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size).populate({ path: "createdBy", select: ["name", "_id"] })
+      .sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {

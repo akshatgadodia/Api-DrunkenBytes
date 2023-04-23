@@ -3,7 +3,6 @@ const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 var jwt = require("jsonwebtoken");
 const SupportUser = require("../models/SupportUser");
-var bcrypt = require('bcryptjs');
 const { ACCOUNT_ADDRESS } = require('../utils/constants');
 
 const registerSupportUser = asyncHandler(async (req, res, next) => {
@@ -11,7 +10,6 @@ const registerSupportUser = asyncHandler(async (req, res, next) => {
   if(supportUser){
     return next(new ErrorResponse("Support User Already Exists", 409));
   }
-  const saltRounds = 10;
   const type = req.body.type.toUpperCase();
   let roles;
   if (type === "EDITOR") {
@@ -32,7 +30,7 @@ const registerSupportUser = asyncHandler(async (req, res, next) => {
   const data = {
     name: req.body.name,
     email: req.body.email,
-    password: await bcrypt.hash(req.body.password, saltRounds),
+    password: req.body.password,
     roles: roles
   };
   await new SupportUser(data).save();

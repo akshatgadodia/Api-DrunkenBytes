@@ -8,113 +8,123 @@ const saveTemplate = asyncHandler(async (req, res, next) => {
     createdBy: req.userId,
     traits: req.body.traits,
     nftType: req.body.nftType,
-    name: req.body.name
+    name: req.body.name,
   }).save();
   res.status(200).json({
     success: true,
     data: {
-      message: "Template Successfully Created"
-    }
+      message: "Template Successfully Created",
+    },
   });
 });
 
 const getTemplates = asyncHandler(async (req, res, next) => {
   const createdBy = req.userId;
   const { filters, page, size, sort } = req.query;
-  let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  let searchParameters = [{ createdBy }];
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
-      if(key === "createdBy") searchParameters.push({ [key]: value });
+      if (key === "createdBy") searchParameters.push({ [key]: value });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  searchParameters.push({
-    createdBy: createdBy
-  });
-  const templates = await Template.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size).sort(JSON.parse(sort));
-  const totalTemplates = await Template.countDocuments({
-    $and: searchParameters
-  });
+  const [totalTemplates, templates] = await Promise.all([
+    Template.countDocuments({
+      $and: searchParameters,
+    }),
+    Template.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size)
+      .sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {
       templates,
-      totalTemplates
-    }
+      totalTemplates,
+    },
   });
 });
 
 const getAllTemplates = asyncHandler(async (req, res, next) => {
   const { filters, page, size, sort } = req.query;
-  console.log(filters)
   let searchParameters = [];
-  if (filters !== "{}" && filters !== "") {
-    const queryParameters = filters.split(",");
-    queryParameters.forEach((element) => {
+  if (filters && filters !== "{}") {
+    filters.split(",").map((element) => {
       const queryParam = JSON.parse(element);
       const key = Object.keys(queryParam)[0];
       const value = Object.values(queryParam)[0];
-      if(key === "createdBy") searchParameters.push({ [key]: value });
+      if (key === "createdBy") searchParameters.push({ [key]: value });
       else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
     });
   }
-  console.log(searchParameters)
-  const templates = await Template.find({ $and: searchParameters })
-    .skip((page - 1) * size)
-    .limit(size).populate({ path: "createdBy", select: ["name", "_id"] }).sort(JSON.parse(sort));
-  const totalTemplates = await Template.countDocuments({
-    $and: searchParameters
-  });
+  const [totalTemplates, templates] = await Promise.all([
+    Template.countDocuments({
+      $and: searchParameters,
+    }),
+    Template.find({ $and: searchParameters })
+      .skip((page - 1) * size)
+      .limit(size)
+      .populate({ path: "createdBy", select: ["name", "_id"] })
+      .sort(JSON.parse(sort)),
+  ]);
   res.status(200).json({
     success: true,
     data: {
       templates,
-      totalTemplates
-    }
+      totalTemplates,
+    },
   });
 });
 
 const getTemplateById = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  const template = await Template.findOne({_id: id})
-  if(!template) return next(new ErrorResponse("Template Not Found", 404));
-  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
+  const template = await Template.findOne({ _id: id });
+  if (!template) return next(new ErrorResponse("Template Not Found", 404));
+  if (template.createdBy.toString() !== req.userId)
+    return next(new ErrorResponse("Permission Denied", 403));
   res.status(201).json({
     success: true,
-    data: {template}
+    data: { template },
   });
 });
 
 const updateTemplateById = asyncHandler(async (req, res, next) => {
-  const id = req.params.id
-  const template = await Template.findOne({_id: id})
-  if(!template) return next(new ErrorResponse("Template Not Found", 404));
-  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
+  const id = req.params.id;
+  const template = await Template.findOne({ _id: id });
+  if (!template) return next(new ErrorResponse("Template Not Found", 404));
+  if (template.createdBy.toString() !== req.userId)
+    return next(new ErrorResponse("Permission Denied", 403));
   await Template.findByIdAndUpdate(id, req.body, {
     new: true, // Return the modified record instead of the original
   });
   res.status(201).json({
     success: true,
-    data: {message : "Template Updated Successfully"}
+    data: { message: "Template Updated Successfully" },
   });
 });
 
 const deleteTemplate = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  const template = await Template.findOne({_id: id})
-  if(!template) return next(new ErrorResponse("Template Not Found", 404));
-  if(template.createdBy.toString() !== req.userId) return next(new ErrorResponse("Permission Denied", 403));
-  await Template.deleteOne({_id: id});
+  const template = await Template.findOne({ _id: id });
+  if (!template) return next(new ErrorResponse("Template Not Found", 404));
+  if (template.createdBy.toString() !== req.userId)
+    return next(new ErrorResponse("Permission Denied", 403));
+  await Template.deleteOne({ _id: id });
   res.status(201).json({
     success: true,
-    data: {message : "Template Deleted Successfully"}
+    data: { message: "Template Deleted Successfully" },
   });
 });
 
-module.exports = { saveTemplate, getTemplates, deleteTemplate, getTemplateById, updateTemplateById, getAllTemplates };
+module.exports = {
+  saveTemplate,
+  getTemplates,
+  deleteTemplate,
+  getTemplateById,
+  updateTemplateById,
+  getAllTemplates,
+};
