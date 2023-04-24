@@ -10,9 +10,10 @@ const logger = require("../config/logger");
 
 const burnExpiredNFTs = async () => {
   try {
-    const transactions = await NftTransaction.find({
-      burnAfter: { $lt: Date.now() },
-    }).populate({ path: "createdBy", select: ["name", "email"] });
+    const transactions = await NftTransaction.find( {
+      $and: [{burnAfter: { $lt: Date.now() }},{burnt: true}]
+   }).populate({ path: "createdBy", select: ["name", "email"] });
+   
     const contract = await new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
     const networkId = await web3.eth.net.getId();
     transactions.forEach(async (transaction) => {
