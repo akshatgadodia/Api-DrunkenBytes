@@ -4,6 +4,7 @@ const ErrorResponse = require("../utils/errorResponse");
 var jwt = require("jsonwebtoken");
 const SupportUser = require("../models/SupportUser");
 const { ACCOUNT_ADDRESS } = require('../utils/constants');
+const bcrypt = require('bcryptjs');
 
 const registerSupportUser = asyncHandler(async (req, res, next) => {
   let supportUser = await SupportUser.findOne({ email: req.body.email });
@@ -91,6 +92,16 @@ const loginSupportUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+const getSupportUserProfile = asyncHandler(async (req, res, next) => {
+  const supportUser = await SupportUser.findOne({ _id: req.userId });
+  res.status(200).json({
+    success: true,
+    data: {
+      supportUser,
+    }
+  });
+});
+
 const logoutSupportUser = asyncHandler(async (req, res, next) => {
   res.clearCookie('db_s_userAccessToken');
   res.status(200).json({
@@ -99,8 +110,28 @@ const logoutSupportUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+const changePassword = asyncHandler(async (req, res, next) => {
+  const { currentPassword, newPassword } = req.body;
+  const supportUser = await SupportUser.findOne({ _id: req.userId });
+  // Check if the current password is correct
+  const isPasswordMatch = await bcrypt.compare(currentPassword, supportUser.password);
+  if (!isPasswordMatch) {
+    return next(new ErrorResponse("Current password is incorrect", 401));
+  }
+  // Hash the new password
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  // Update the user's password in the database
+  await SupportUser.findByIdAndUpdate(req.userId, { password: hashedPassword });
+  res.status(200).json({
+    success: true,
+    data: { message: "Password updated successfully" }
+  });
+});
+
 module.exports = {
   registerSupportUser,
   loginSupportUser,
-  logoutSupportUser
+  logoutSupportUser,
+  getSupportUserProfile,
+  changePassword
 };

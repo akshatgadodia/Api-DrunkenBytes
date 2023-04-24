@@ -40,7 +40,7 @@ const replyToTicket = asyncHandler(async (req, res, next) => {
         conversation: {
           sender: req.userId,
           message: req.body.message,
-          sentBy:  (req.roles.includes(6541)) ? "user" : "supportUser",
+          sentBy: req.roles.includes(6541) ? "user" : "supportUser",
         },
       },
       lastUpdated: new Date(),
@@ -66,13 +66,17 @@ const closeTicket = asyncHandler(async (req, res, next) => {
       $push: {
         conversation: {
           sender: req.userId,
-          message: (req.roles.includes(6541)) ? "Ticket has been closed by You" : req.body.message,
-          sentBy:  (req.roles.includes(6541)) ? "user" : "supportUser",
+          message: req.roles.includes(6541)
+            ? "Ticket has been closed by You"
+            : req.body.message,
+          sentBy: req.roles.includes(6541) ? "user" : "supportUser",
         },
       },
       lastUpdated: new Date(),
-      status: (req.roles.includes(6541)) ? "Ticket has been closed by You" : req.body.status,
-      isSolved: true
+      status: req.roles.includes(6541)
+        ? "Ticket has been closed by You"
+        : req.body.status,
+      isSolved: true,
     },
     { new: true }
   );
@@ -83,19 +87,23 @@ const closeTicket = asyncHandler(async (req, res, next) => {
       message: "Ticket Closed Successfully",
     },
   });
-
 });
 
 const getTicketById = asyncHandler(async (req, res, next) => {
-  const ticket = await Ticket.findOne({ _id: req.params.id })
-  .populate({
-    path: 'conversation.sender',
-    select: 'name _id', // Specify the fields to select from the populated document
-  });
+  const ticket = await Ticket.findOne({ _id: req.params.id }).populate([
+    {
+      path: "conversation.sender",
+      select: "name _id", // Specify the fields to select from the populated document
+    },
+    {
+      path: "createdBy",
+      select: "name _id", // Specify the fields to select from the populated document
+    },
+  ]);
   res.status(201).json({
     success: true,
     data: {
-      ticket
+      ticket,
     },
   });
 });
@@ -134,7 +142,8 @@ const getTickets = asyncHandler(async (req, res, next) => {
     Ticket.find({ $and: searchParameters })
       .skip((page - 1) * size)
       .limit(size)
-      .sort(JSON.parse(sort)).select({conversation: 0, createdBy: 0}),
+      .sort(JSON.parse(sort))
+      .select({ conversation: 0, createdBy: 0 }),
   ]);
   res.status(200).json({
     success: true,
@@ -181,7 +190,8 @@ const getAllTickets = asyncHandler(async (req, res, next) => {
     }),
     Ticket.find({ $and: searchParameters })
       .skip((page - 1) * size)
-      .limit(size).populate({ path: "createdBy", select: ["name", "_id"] })
+      .limit(size)
+      .populate({ path: "createdBy", select: ["name", "_id"] })
       .sort(JSON.parse(sort)),
   ]);
   res.status(200).json({
@@ -199,5 +209,5 @@ module.exports = {
   getTicketById,
   getAllTickets,
   replyToTicket,
-  closeTicket
+  closeTicket,
 };
