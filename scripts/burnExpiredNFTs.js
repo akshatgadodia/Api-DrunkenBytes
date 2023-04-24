@@ -44,6 +44,8 @@ const burnExpiredNFTs = async () => {
       );
       console.log(receipt)
       transaction._doc.txId = signedTx.transactionHash;
+      transaction.burnt=true
+      await transaction.save();
       sendBurnMail({...transaction._doc, sellerName: transaction.createdBy.name, sellerEmail: transaction.createdBy.email})
     });
   } catch (error) {

@@ -14,6 +14,10 @@ const nftTransactionSchema = new Schema({
   receiverWalletAddress: String,
   nftType: String,
   nftName: String,
+  burnt:{
+    type:Boolean,
+    default:false
+  },
   useCustomImage: {type: Boolean, default: false},
   isTransferable: {type: Boolean, default: true},
   isBurnable: {type: Boolean, default: false},
