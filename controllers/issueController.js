@@ -6,10 +6,11 @@ const Issue = require("../models/Issue");
 
 const saveIssue = asyncHandler(async (req, res, next) => {
   const [transaction, issue] = await Promise.all([
-    NftTransaction.findOne({ tokenId: req.body.tokenId }),
+    NftTransaction.findOne({ tokenId: req.body.tokenId, transactionType: "Mint" }),
     Issue.findOne({ tokenId: req.body.tokenId }),
   ]);
   if (!transaction) return next(new ErrorResponse("Invalid Token ID", 404));
+  if (transaction.burned) return next(new ErrorResponse("Cannot Raise Issue for a burned NFT", 403));
   if (issue)
     return next(
       new ErrorResponse("Issue Already Raised for this Token ID", 403)

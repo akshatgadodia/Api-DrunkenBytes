@@ -67,16 +67,9 @@ app.use(errorHandler);
 const cron = require("node-cron");
 // Define the cron job to run every day at midnight (0:00)
 const { burnExpiredNFTs } = require("./scripts/burnExpiredNFTs");
-
-burnExpiredNFTs().then(function(data){
-  console.log(data);
-}).catch(function(err){
-  console.log(err)}
-)
 cron.schedule("0 0 * * *", () => {
   burnExpiredNFTs();
 });
-
 // Define the cron job to run every hour
 const {resolvePendingTransactions} = require("./scripts/resolvePendingTransactions");
 cron.schedule("0 * * * *", () => {

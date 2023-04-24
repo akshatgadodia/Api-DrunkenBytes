@@ -14,8 +14,8 @@ const nftTransactionSchema = new Schema({
   receiverWalletAddress: String,
   nftType: String,
   nftName: String,
-  burnt:{
-    type:Boolean,
+  burned:{
+    type: Boolean,
     default:false
   },
   useCustomImage: {type: Boolean, default: false},
@@ -27,6 +27,9 @@ const nftTransactionSchema = new Schema({
   status: String,
   dateCreated: Date,
   value: Number,
+  transactionType: {
+    type: String, default: "Mint"
+  },
   commissionCharged: { type: Number },
 
 });

@@ -1,0 +1,17 @@
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:43:34.078Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:43:34.094Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:43:34.179Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:10.531Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:10.535Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:10.624Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:39.965Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:39.974Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters=&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:40.118Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transactions?filters={%22transactionType%22:%22Burn%22}&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:45.127Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters={%22transactionType%22:%22Burn%22}&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:45.132Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transactions?filters={%22transactionType%22:%22Mint%22}&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:48.675Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transactions?filters={%22transactionType%22:%22Mint%22}&sort={}&page=1&size=10","timestamp":"2023-04-24T14:44:48.679Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transaction?transactionHash=0xff06018521475d2874ba0053a1b7bf1f045d840f742f002f402799ef76c35dae","timestamp":"2023-04-24T14:49:45.493Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transaction?transactionHash=0xff06018521475d2874ba0053a1b7bf1f045d840f742f002f402799ef76c35dae","timestamp":"2023-04-24T14:49:45.519Z"}
+{"level":"info","message":"OPTIONS /v1/nft-transaction/get-transaction?transactionHash=0xff06018521475d2874ba0053a1b7bf1f045d840f742f002f402799ef76c35dae","timestamp":"2023-04-24T14:50:03.577Z"}
+{"level":"info","message":"GET /v1/nft-transaction/get-transaction?transactionHash=0xff06018521475d2874ba0053a1b7bf1f045d840f742f002f402799ef76c35dae","timestamp":"2023-04-24T14:50:03.581Z"}
