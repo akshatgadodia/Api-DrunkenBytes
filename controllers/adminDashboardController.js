@@ -7,9 +7,9 @@ const NftTransaction = require("../models/NftTransaction");
 const getPerformanceData = asyncHandler(async (req, res, next) => {
   const [businessServed, nftsCreated, netTransactionValue] = await Promise.all([
     User.countDocuments({}),
-    NftTransaction.countDocuments({ status: "Success" }),
+    NftTransaction.countDocuments({ status: "Success", transactionType: "Mint" }),
     NftTransaction.aggregate([
-      { $match: { status: "Success" } },
+      { $match: { status: "Success", transactionType: "Mint" } },
       { $group: { _id: null, total: { $sum: "$value" } } },
     ]).then((result) => result[0]?.total || 0), // handle empty result
   ]);

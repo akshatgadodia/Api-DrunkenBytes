@@ -125,12 +125,12 @@ const getUser = asyncHandler(async (req, res, next) => {
 const getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ _id: req.userId });
   const apiKey = await ApiKey.countDocuments({createdBy: req.userId});
-  const nft = await NftTransaction.countDocuments({createdBy: req.userId});
-  const pendingTransactions = await NftTransaction.countDocuments({createdBy: req.userId, status: "pending"});
+  const nft = await NftTransaction.countDocuments({createdBy: req.userId, transactionType: "Mint"});
+  const pendingTransactions = await NftTransaction.countDocuments({createdBy: req.userId, status: "pending", transactionType: "Mint"});
   const totalIssues = await Issue.countDocuments({issueFor: req.userId});
   const solvedIssues = await Issue.countDocuments({issueFor: req.userId, isSolved: true});
   const templates = await Template.countDocuments({createdBy: req.userId});
-  const result = await NftTransaction.find({createdBy: req.userId}).sort({dateCreated: -1});
+  const result = await NftTransaction.find({createdBy: req.userId, transactionType: "Mint"}).sort({dateCreated: -1});
   const value = result.reduce((accumulator, transaction) => accumulator + transaction.value, 0);
   res.status(200).json({
     success: true,
