@@ -97,16 +97,23 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
     const transactionReceipt = await web3.eth.getTransactionReceipt(
       signedTx.transactionHash
     );
-    // console.log(transactionReceipt);
+    console.log("transactioneee",transactionReceipt);
     // const tokenId = web3.utils.hexToNumber(
     //   transactionReceipt?.logs[0]?.topics[3]
     // );
     const value = transactionReceipt?.effectiveGasPrice * transactionReceipt?.gasUsed;
+    try{
     await sendConfirmationMail({
       ...dataToStore,
       txId: receipt.transactionHash,
       value
     });
+    }
+    catch(err)
+    {
+      console.log("ERRORRR");
+      console.log(err);
+    }
     const transactionCost = await web3.utils.fromWei(value.toString(), "ether");
     return { result: "Success", value: transactionCost };
   } catch (err) {
@@ -217,6 +224,7 @@ const processNFT = async (req, res, next) => {
         signedTx,
         dataToStore
       );
+      console.log(result,value);
       //Storing the result  on the database and decreasing the hits value
       await storeTransactionDataAndDecreaseUserBalance(req, {
         ...dataToStore,

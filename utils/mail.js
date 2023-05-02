@@ -85,6 +85,7 @@ const sendErrorMail = async (data) => {
 
 const sendConfirmationMail = async (data) => {
   try {
+    console.log(data);
     const etherscanURL = `${BLOCK_EXPLORER_URL}/${data.txId}`;
     const openseaURL = `${OPENSEA_URL}/${CONTRACT_ADDRESS}/${data.tokenId}`;
     let sendResult = await transporter.sendMail({
@@ -140,7 +141,8 @@ const sendConfirmationMail = async (data) => {
           </p></div>`,
     });
     //   console.log(sendResult);
-    sendResult = await transporter.sendMail({
+    console.log("dataa",data,data.sellerEmail,data.sellerName);
+    let sendresult = await transporter.sendMail({
       from: "Drunken Bytes <bytes.drunken@hotmail.com>",
       to: `${data.sellerEmail}`,
       subject: `Congratulations! Your ${data.nftName} NFT has been Successfully Generated`,
@@ -200,7 +202,7 @@ const sendConfirmationMail = async (data) => {
         Drunken Bytes Team
       </p></div>`,
     });
-    //   console.log(sendResult);
+      console.log("srrr",sendresult);
   } catch (err) {
     console.log(err);
   }
