@@ -13,10 +13,17 @@ const saveArticle = asyncHandler(async (req, res, next) => {
 });
 
 const getArticles = asyncHandler(async (req, res, next) => {
-  const articles = await Article.find();
+  const { page, size } = req.query;
+  const [articles, totalArticles] = await Promise.all([
+    Article.find({}).select({content: 0})
+      .skip((page - 1) * size)
+      .limit(size)
+      .sort({ createdAt: -1 }),
+    Article.countDocuments({})
+  ]);
   res.status(200).json({
     success: true,
-    data: { articles },
+    data: { articles,totalArticles },
   });
 });
 

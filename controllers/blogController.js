@@ -13,11 +13,19 @@ const saveBlog = asyncHandler(async (req, res, next) => {
 });
 
 const getBlogs = asyncHandler(async (req, res, next) => {
-  const blogs = await Blog.find();
+  const { page, size } = req.query;
+  const [blogs, totalBlogs] = await Promise.all([
+    Blog.find({}).select({content: 0})
+      .skip((page - 1) * size)
+      .limit(size)
+      .sort({ createdAt: -1 }),
+    Blog.countDocuments({})
+  ]);
   res.status(200).json({
     success: true,
-    data: { blogs },
+    data: { blogs,totalBlogs },
   });
+  
 });
 
 const getBlogsByUrl = asyncHandler(async (req, res, next) => {

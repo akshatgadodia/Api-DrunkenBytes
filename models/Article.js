@@ -18,6 +18,10 @@ const articleSchema = new Schema({
     type: String,
     required: [true, "Article image is required"]
   },
+  description:{
+    type: String,
+    required: [true, "Article description is required"]
+  },
   content: Object,
 });
 
