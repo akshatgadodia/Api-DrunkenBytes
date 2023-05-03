@@ -97,7 +97,6 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
     const transactionReceipt = await web3.eth.getTransactionReceipt(
       signedTx.transactionHash
     );
-    // console.log(transactionReceipt);
     // const tokenId = web3.utils.hexToNumber(
     //   transactionReceipt?.logs[0]?.topics[3]
     // );

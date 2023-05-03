@@ -140,7 +140,7 @@ const sendConfirmationMail = async (data) => {
           </p></div>`,
     });
     //   console.log(sendResult);
-    sendResult = await transporter.sendMail({
+    let sendMailResult = await transporter.sendMail({
       from: "Drunken Bytes <bytes.drunken@hotmail.com>",
       to: `${data.sellerEmail}`,
       subject: `Congratulations! Your ${data.nftName} NFT has been Successfully Generated`,
@@ -200,7 +200,6 @@ const sendConfirmationMail = async (data) => {
         Drunken Bytes Team
       </p></div>`,
     });
-    //   console.log(sendResult);
   } catch (err) {
     console.log(err);
   }
