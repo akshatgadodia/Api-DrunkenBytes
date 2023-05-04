@@ -14,6 +14,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 });
+
 const sendErrorMail = async (data) => {
   try {
     let sendResult = await transporter.sendMail({
@@ -377,4 +378,48 @@ const sendBurnMail = async (data) => {
   }
 };
 
-module.exports = { sendConfirmationMail, sendErrorMail, sendPendingMail, sendBurnMail };
+const sendAccountApprovedMail = async (data) => {
+  try {
+    let sendResult = await transporter.sendMail({
+      from: "Drunken Bytes <bytes.drunken@hotmail.com>",
+      to: `${data.email}`,
+      subject: `Account Verified and Approved by Drunken Bytes`,
+      text: `Dear ${data.name},
+      
+      We are writing to inform you that your account has been verified and approved by the Drunken Bytes team. You can now log in to the Drunken Bytes website using your Web3 wallet and start availing all of our services.
+
+      We understand the importance of maintaining a secure and reliable platform for our clients, and we take pride in ensuring that all accounts are thoroughly verified before being approved. With this verification process complete, you can now enjoy the benefits of our platform and all of its features.
+
+      Please note that our team is always available to assist you with any questions or concerns you may have. We value your business and are committed to providing you with the highest level of support possible.
+
+      Thank you for choosing Drunken Bytes for your needs. We look forward to working with you.
+      
+      Best regards,
+      Drunken Bytes Team`,
+      html: `<div><p>
+        Dear ${data.name},
+      </p>
+      <p>
+        We are writing to inform you that your account has been verified and approved by the Drunken Bytes team. You can now log in to the Drunken Bytes website using your Web3 wallet and start availing all of our services.
+      </p>
+      <p>
+        We understand the importance of maintaining a secure and reliable platform for our clients, and we take pride in ensuring that all accounts are thoroughly verified before being approved. With this verification process complete, you can now enjoy the benefits of our platform and all of its features.
+      </p>
+      <p>
+        Please note that our team is always available to assist you with any questions or concerns you may have. We value your business and are committed to providing you with the highest level of support possible.
+      </p>
+      <p>
+        Thank you for choosing Drunken Bytes for your needs. We look forward to working with you.
+      </p>
+      <p>
+        Best regards,<br>
+        Drunken Bytes Team
+      </p></div>`,
+    });
+    //   console.log(sendResult);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { sendConfirmationMail, sendErrorMail, sendPendingMail, sendBurnMail, sendAccountApprovedMail };

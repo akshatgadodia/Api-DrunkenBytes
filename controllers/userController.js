@@ -10,6 +10,7 @@ const Template = require("../models/Template");
 
 const { v4: uuidv4 } = require('uuid');
 const { web3 } = require("../config/web3");
+const { sendAccountApprovedMail } = require("../utils/mail");
 
 const initialLoginUser = asyncHandler(async (req, res, next) => {
   const accountAddress = req.body.accountAddress;
@@ -101,10 +102,11 @@ const updateUserData = asyncHandler(async (req, res, next) => {
 });
 
 const verifyUser = asyncHandler(async (req, res, next) => {
-  await User.findOneAndUpdate(
+  const user = await User.findOneAndUpdate(
     { _id: req.params.id },
     { verified: true, verifiedBy: req.userId}
   );
+  await sendAccountApprovedMail(user);
   res.status(200).json({
     success: true,
     data: { message: "User Verified Successfully" }
