@@ -8,7 +8,9 @@ const {
   loginSupportUser,
   logoutSupportUser,
   getSupportUserProfile,
-  changePassword
+  changePassword,
+  getSupportUser,
+  getAllSupportUsers
 } = require("../controllers/supportUserController");
 
 router.post("/login", loginSupportUser);
@@ -16,5 +18,8 @@ router.post("/register", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN), reg
 router.get("/get-user-profile", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SALES, ROLES_LIST.SUPPORT, ROLES_LIST.EDITOR), getSupportUserProfile);
 router.post("/change-password", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SALES, ROLES_LIST.SUPPORT, ROLES_LIST.EDITOR), changePassword)
 router.post("/logout", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SALES, ROLES_LIST.SUPPORT, ROLES_LIST.EDITOR), logoutSupportUser)
+
+router.get("/get-support-user", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SUPPORT, ROLES_LIST.SALES, ROLES_LIST.EDITOR), getSupportUser);
+router.get("/get-all-support-users", verifyUserToken, verifyUserRoles(ROLES_LIST.ADMIN, ROLES_LIST.SUPPORT, ROLES_LIST.SALES, ROLES_LIST.EDITOR), getAllSupportUsers);
 
 module.exports = router;

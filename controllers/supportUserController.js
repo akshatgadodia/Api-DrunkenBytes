@@ -128,10 +128,49 @@ const changePassword = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getSupportUser = asyncHandler(async (req, res, next) => {
+  const supportUserId = req.query.supportUserId;
+  const supportUser = await SupportUser.findOne({ _id: supportUserId });
+  res.status(200).json({
+    success: true,
+    data: {
+      supportUser
+    }
+  });
+});
+
+const getAllSupportUsers = asyncHandler(async (req, res, next) => {
+  const { q, page, size } = req.query;
+  let searchParameters = [];
+  if (q !== "{}" && q !== "") {
+    const queryParameters = q.split(",");
+    queryParameters.forEach(element => {
+      const queryParam = JSON.parse(element);
+      const key = Object.keys(queryParam)[0];
+      const value = Object.values(queryParam)[0];
+      if(key === "roles") searchParameters.push({ [`${key}.${value}`]: { $exists: true } });
+      else searchParameters.push({ [key]: { $regex: ".*" + value + ".*" } });
+    });
+  }
+  const supportUsers = await SupportUser.find({ $and: searchParameters })
+    .skip((page - 1) * size)
+    .limit(size).sort({name: 1});
+  const totalSupportUsers = await SupportUser.countDocuments({ $and: searchParameters });
+  res.status(200).json({
+    success: true,
+    data: {
+      supportUsers,
+      totalSupportUsers
+    }
+  });
+});
+
 module.exports = {
   registerSupportUser,
   loginSupportUser,
   logoutSupportUser,
   getSupportUserProfile,
-  changePassword
+  changePassword,
+  getSupportUser,
+  getAllSupportUsers
 };
