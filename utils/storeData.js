@@ -27,7 +27,7 @@ const saveDataOnIPFS = async (values) => {
         "Drunken Bytes NFTs are unique digital tokens created by businesses to represent their products and credentials in a verifiable and immutable way. These NFTs are designed to enhance the authenticity and trustworthiness of the products and credentials they represent, and can be used for a variety of purposes such as proof of ownership, verification of authenticity, or as a reward system for loyal customers. Each NFT is unique and can be easily verified on the blockchain, ensuring that it cannot be duplicated or tampered with. By leveraging the power of blockchain technology, Drunken Bytes NFTs offer businesses a new and innovative way to secure their products and credentials, while providing their customers with an added layer of trust and confidence.",
       image: values.useCustomImage
         ? values.imageBase64
-        : "ipfs://QmWvHbUYRZEUr4hx617nBiCsH2zrAGMBbLxJZEUpzwa6hh",
+        : "ipfs://QmSRGgeJjvo9WPfbmdhn8mMcMgYxcTzT3KdnWdGWtPGdkq",
       external_url: `https://drunkenbytes.vercel.app/raise-issue/${values.tokenId}`,
       name: values.nftName,
       attributes,
