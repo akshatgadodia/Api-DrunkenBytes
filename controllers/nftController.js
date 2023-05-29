@@ -106,12 +106,7 @@ const sendSignedWeb3Transaction = async (signedTx, dataToStore) => {
       txId: receipt.transactionHash,
       value
     });
-    console.log(transactionReceipt);
-    console.log(value);
-
     const transactionCost = await web3.utils.fromWei(value.toString(), "ether");
-    console.log(transactionCost);
-
     return { result: "Success", value: transactionCost };
   } catch (err) {
     if (
