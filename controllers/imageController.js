@@ -32,7 +32,7 @@ const saveImage = asyncHandler((req, res, next) => {
             const inputFilePath = path.join(req.file.path);
             const folderName = req?.query?.folder;
             const baseFileName = path.basename(inputFilePath, path.extname(inputFilePath));
-            const outputFilePath = path.join(__dirname, '..', '..', 'public', 'images', folderName, baseFileName + '.jpg');
+            const outputFilePath = path.join('public', 'images', folderName, baseFileName + Date.now() + '.jpg');
             await sharp(inputFilePath)
                 .jpeg({ quality: 80 })
                 .toFile(outputFilePath);
@@ -40,6 +40,12 @@ const saveImage = asyncHandler((req, res, next) => {
                 if (err) {
                     console.error(err);
                 }
+            });
+            const newOutputFilePath = path.join('public', 'images', folderName, baseFileName + '.jpg');
+            fs.rename(outputFilePath, newOutputFilePath, (err) => {
+                if (err) {
+                    console.error(err);
+                } 
             });
             const data = {
                 success: true,
